@@ -3,3 +3,5 @@ seaborn
 pandas
 numpy
 plotly
+requests
+IO
