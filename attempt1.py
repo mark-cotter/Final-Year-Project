@@ -5,7 +5,7 @@ import requests
 from io import BytesIO
 
 # Define the URL of the Excel file in the GitHub repository
-github_raw_url = "https://raw.githubusercontent.com/mark-cotter/Graph_work/main/path/to/just_netflix_data.xlsx"
+github_raw_url = "https://github.com/mark-cotter/Graph_work/blob/f9e8f8d460d4fbb0d1b56cb8e1b272909766c4dd/just_netflix_data.xlsx"
 
 def fetch_data_from_github():
     try:
