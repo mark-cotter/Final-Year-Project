@@ -12,7 +12,7 @@ def fetch_data_from_github():
         # Fetch the raw content of the Excel file from GitHub
         response = requests.get(github_raw_url)
         response.raise_for_status()  # Raise an exception for HTTP errors
-        return pd.read_excel(BytesIO(response.content))
+        return pd.read_excel(BytesIO(response.content), engine='openpyxl')
     except Exception as e:
         st.error(f"Error fetching data from GitHub: {e}")
         return None
