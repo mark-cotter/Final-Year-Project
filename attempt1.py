@@ -5,7 +5,7 @@ import requests
 import io
 
 # Define the URL of the CSV file in the GitHub repository
-github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/756c067c221252d92e66827e5071c76baacacf9b/just_netflix_data.csv"
+github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv"
 def fetch_data_from_github():
     try:
         # Fetch the raw content of the CSV file from GitHub
