@@ -2,17 +2,16 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import requests
-from io import BytesIO
 
-# Define the URL of the Excel file in the GitHub repository
-github_raw_url = "https://github.com/mark-cotter/Graph_work/blob/f9e8f8d460d4fbb0d1b56cb8e1b272909766c4dd/just_netflix_data.xlsx"
+# Define the URL of the CSV file in the GitHub repository
+github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/f9e8f8d460d4fbb0d1b56cb8e1b272909766c4dd/just_netflix_data.csv"
 
 def fetch_data_from_github():
     try:
-        # Fetch the raw content of the Excel file from GitHub
+        # Fetch the raw content of the CSV file from GitHub
         response = requests.get(github_raw_url)
         response.raise_for_status()  # Raise an exception for HTTP errors
-        return pd.read_excel(BytesIO(response.content), engine='openpyxl')
+        return pd.read_csv(response.content)
     except Exception as e:
         st.error(f"Error fetching data from GitHub: {e}")
         return None
