@@ -4,8 +4,7 @@ import plotly.graph_objects as go
 import requests
 import io
 
-# Define the URL of the CSV files in the GitHub repository
-github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/"
+
 
 def fetch_data_from_github(file_path):
     try:
