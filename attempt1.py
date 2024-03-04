@@ -10,7 +10,7 @@ github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2
 def fetch_data_from_github(filename):
     try:
         # Fetch the raw content of the CSV file from GitHub
-        response = requests.get(filename)
+        response = requests.get(github_raw_url + filename)
         response.raise_for_status()  # Raise an exception for HTTP errors
         return pd.read_csv(io.StringIO(response.text))
     except Exception as e:
@@ -56,8 +56,7 @@ def main():
 
     if selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub
-        github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/"
-        df_netflix_data = fetch_data_from_github(git_hub_raw_url + "just_netflix_data_csv_error_tester.csv")
+        df_netflix_data = fetch_data_from_github("just_netflix_data_csv_error_tester.csv")
         if df_netflix_data is not None:
             # Plotting
             fig = go.Figure()
@@ -111,10 +110,11 @@ def main():
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
-        df_region = fetch_data_from_github("netflix_region_breakdown.csv")
+        df_region = fetch_data_from_github("Netflix Region Breakdown.csv")
         if df_region is not None:
             # Create and display region breakdown chart
             st.plotly_chart(create_region_breakdown_chart(df_region))
 
 if __name__ == "__main__":
     main()
+
