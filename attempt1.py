@@ -4,18 +4,49 @@ import plotly.graph_objects as go
 import requests
 import io
 
-# Define the URL of the CSV file in the GitHub repository
-github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv"
+# Define the URL of the CSV files in the GitHub repository
+github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/"
 
-def fetch_data_from_github():
+def fetch_data_from_github(filename):
     try:
         # Fetch the raw content of the CSV file from GitHub
-        response = requests.get(github_raw_url)
+        response = requests.get(github_raw_url + filename)
         response.raise_for_status()  # Raise an exception for HTTP errors
         return pd.read_csv(io.StringIO(response.text))
     except Exception as e:
         st.error(f"Error fetching data from GitHub: {e}")
         return None
+
+def create_region_breakdown_chart(df_region):
+    fig = go.Figure()
+
+    values = df_region[df_region['Quarter'] == df_region['Quarter'].iloc[0]][['UCAN Sub', 'EMEA Sub', 'LATAM Sub', 'APAC Sub']].iloc[0].tolist()
+    pie_chart = go.Pie(labels=['UCAN Sub', 'EMEA Sub', 'LATAM Sub', 'APAC Sub'], values=values, name=df_region['Quarter'].iloc[0])
+    fig.add_trace(pie_chart)
+
+    buttons = [dict(label='Play',
+                     method='animate',
+                     args=[None, dict(frame=dict(duration=400, redraw=True), fromcurrent=True)]),
+               dict(label='Pause',
+                    method='animate',
+                    args=[[None], dict(frame=dict(duration=0, redraw=True), mode='immediate')])]
+
+    fig.update_layout(title='Subscription Distribution Over Quarters in Millions', 
+                      updatemenus=[dict(type='buttons', showactive=False, buttons=buttons)],
+                      annotations=[dict(text=df_region['Quarter'].iloc[0], showarrow=False, x=0.9, y=0.3, font=dict(size=20))],
+                      height=380,
+                      legend=dict(traceorder='normal', title=dict(font=dict(size=16)), font=dict(size=18)))  # Set the legend font size
+
+    frames = [go.Frame(data=[go.Pie(labels=['UCAN Sub', 'EMEA Sub', 'LATAM Sub', 'APAC Sub'],
+                                    values=df_region[df_region['Quarter'] == quarter][['UCAN Sub', 'EMEA Sub', 'LATAM Sub', 'APAC Sub']].iloc[0].tolist(),
+                                    name=quarter)],
+                       name=quarter,
+                       layout=dict(annotations=[dict(text=quarter, showarrow=False, x=0.8, y=0.5, font=dict(size=20))]))
+              for quarter in df_region['Quarter']]
+
+    fig.frames = frames
+
+    return fig
 
 def main():
     st.sidebar.title("Navigation")
@@ -25,7 +56,7 @@ def main():
 
     if selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub
-        df_netflix_data = fetch_data_from_github()
+        df_netflix_data = fetch_data_from_github("just_netflix_data_csv_error_tester.csv")
         if df_netflix_data is not None:
             # Plotting
             fig = go.Figure()
@@ -78,8 +109,11 @@ def main():
         st.write("Fill in genre breakdown here")
 
     elif selected_tab == "Region Breakdown":
-        # Placeholder for region breakdown
-        st.write("Fill in region breakdown here")
+        # Fetch data from GitHub
+        df_region = fetch_data_from_github("Netflix Region Breakdown.csv")
+        if df_region is not None:
+            # Create and display region breakdown chart
+            st.plotly_chart(create_region_breakdown_chart(df_region))
 
 if __name__ == "__main__":
     main()
