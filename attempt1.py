@@ -53,7 +53,7 @@ def main():
 
     if selected_tab == "Netflix Subscription Breakdown":
         # Placeholder for GitHub URL for subscription change over quarters data
-        github_url = "YOUR_GITHUB_URL_HERE"
+        github_url = "https://github.com/mark-cotter/Graph_work/raw/d679935c202d14da6b62ef8eb2e9f0483f111f49/sub_change_Q2Q.csv"
         
         # Fetch data from GitHub for subscription change over quarters
         df_sub = fetch_data_from_github(github_url)
