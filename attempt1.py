@@ -57,7 +57,7 @@ def main():
     if selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub
         github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/"
-        df_netflix_data = fetch_data_from_github(git_hub_raw_url+"just_netflix_data_csv_error_tester.csv")
+        df_netflix_data = fetch_data_from_github(git_hub_raw_url + "just_netflix_data_csv_error_tester.csv")
         if df_netflix_data is not None:
             # Plotting
             fig = go.Figure()
