@@ -126,7 +126,7 @@ def main():
                                                  mode='markers', name='Password Sharing Crackdown',
                                                  marker=dict(symbol='circle', size=10, color='blue')))
 
-                fig_netflix.update_layout(xaxis_title='Quarter', yaxis_title='Sub Increase in millions', height=370)
+                fig_netflix.update_layout(title_text='Detailed Netflix Subscription Timeline',xaxis_title='Quarter', yaxis_title='Sub Increase in millions', height=370)
 
                 st.plotly_chart(fig_netflix)
             else:
