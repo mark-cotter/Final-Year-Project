@@ -7,15 +7,16 @@ import io
 # Define the URL of the CSV files in the GitHub repository
 github_raw_url = "https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/"
 
-def fetch_data_from_github(filename):
+def fetch_data_from_github(file_path):
     try:
         # Fetch the raw content of the CSV file from GitHub
-        response = requests.get(github_raw_url + filename)
+        response = requests.get(file_path)
         response.raise_for_status()  # Raise an exception for HTTP errors
         return pd.read_csv(io.StringIO(response.text))
     except Exception as e:
         st.error(f"Error fetching data from GitHub: {e}")
         return None
+
 
 def create_region_breakdown_chart(df_region):
     fig = go.Figure()
@@ -56,7 +57,7 @@ def main():
 
     if selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub
-        df_netflix_data = fetch_data_from_github("just_netflix_data_csv_error_tester.csv")
+        df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv")
         if df_netflix_data is not None:
             # Plotting
             fig = go.Figure()
