@@ -18,11 +18,10 @@ def fetch_data_from_github():
         return None
 
 def main():
-    st.title("Netflix Analysis")
-
-    # Create tabs
-    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown"]
-    selected_tab = st.radio("Select Analysis", tabs)
+    st.sidebar.title("Navigation")
+    # Create tabs in the sidebar
+    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown"]
+    selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub
@@ -77,6 +76,10 @@ def main():
     elif selected_tab == "Genre Breakdown":
         # Placeholder for genre breakdown
         st.write("Fill in genre breakdown here")
+
+    elif selected_tab == "Region Breakdown":
+        # Placeholder for region breakdown
+        st.write("Fill in region breakdown here")
 
 if __name__ == "__main__":
     main()
