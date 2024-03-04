@@ -18,9 +18,6 @@ def fetch_data_from_github():
         return None
 
 def main():
-    # Set the theme to light mode
-    st.set_page_config(page_title="Netflix Analysis", page_icon=":tv:", layout="wide", initial_sidebar_state="expanded", theme="light")
-
     st.title("Netflix Analysis")
 
     # Create tabs
