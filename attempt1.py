@@ -110,7 +110,7 @@ def main():
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
-        df_region = fetch_data_from_github("Netflix Region Breakdown.csv")
+        df_region = fetch_data_from_github("netflix_region_breakdown.csv")
         if df_region is not None:
             # Create and display region breakdown chart
             st.plotly_chart(create_region_breakdown_chart(df_region))
