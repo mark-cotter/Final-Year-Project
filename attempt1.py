@@ -143,23 +143,51 @@ def main():
         genre_sum = df_genre.groupby("Genre")["Hours Viewed"].sum().reset_index()
         # Sort the DataFrame by the sum of hours viewed in descending order
         genre_sum_sorted = genre_sum.sort_values(by="Hours Viewed", ascending=False)
-        # Create the plot
-        fig_genre = go.Figure(
+        # Create the plot for total hours viewed by genre
+        fig_genre_total_hours = go.Figure(
             data=[go.Bar(
                 x=genre_sum_sorted["Genre"],  # X-axis: Genre
                 y=genre_sum_sorted["Hours Viewed"],  # Y-axis: Sum of Hours Viewed
                 name="Total Hours Viewed"
             )]
         )
-        # Update layout
-        fig_genre.update_layout(
+        # Update layout for total hours viewed by genre
+        fig_genre_total_hours.update_layout(
             title="Total Hours Viewed by Genre",
             xaxis_title="Genre",
             yaxis_title="Total Hours Viewed",
             yaxis=dict(range=[0, genre_sum_sorted["Hours Viewed"].max() + 1000000])  # Adjusting y-axis range
         )
-        # Display the plot
-        st.plotly_chart(fig_genre)
+        # Plot total hours viewed by genre
+        st.plotly_chart(fig_genre_total_hours)
+
+        # Subset the DataFrame for Genre equals Children
+        df_children = df_genre[df_genre['Genre'] == 'Children']
+
+        # Calculate combined viewing hours for CoComelon and PAW Patrol
+        cocomelon_hours = df_children[df_children['Title'].str.contains('CoComelon', case=False)]['Hours Viewed'].sum()
+        paw_patrol_hours = df_children[df_children['Title'].str.contains('PAW Patrol', case=False)]['Hours Viewed'].sum()
+
+        # Calculate combined viewing hours for everything else
+        other_hours = df_children[~df_children['Title'].str.contains('CoComelon|PAW Patrol', case=False)]['Hours Viewed'].sum()
+
+        # Create bar chart for comparing CoComelon & PAW Patrol to all other children's TV shows
+        fig_genre_comparison = go.Figure()
+
+        fig_genre_comparison.add_trace(go.Bar(
+            x=['CoComelon & PAW Patrol', 'All Other Childrens Shows'],
+            y=[cocomelon_hours + paw_patrol_hours, other_hours],
+            marker_color=['blue', 'green']
+        ))
+
+        fig_genre_comparison.update_layout(
+            title='CoComelon & PAW Patrol Compared to All Other Childrens TV Shows',
+            xaxis_title='Category',
+            yaxis_title='Combined Viewing Hours'
+        )
+
+        # Plot comparison chart
+        st.plotly_chart(fig_genre_comparison)
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
