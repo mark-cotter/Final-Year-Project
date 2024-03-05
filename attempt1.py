@@ -135,8 +135,31 @@ def main():
             st.warning("Please provide the GitHub URL for subscription change over quarters data.")
 
     elif selected_tab == "Genre Breakdown":
-        # Placeholder for genre breakdown
-        st.write("Fill in genre breakdown here")
+        # Load genre breakdown data
+        df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
+        # Remove commas from "Hours Viewed" and convert to integer
+        df_genre["Hours Viewed"] = df_genre["Hours Viewed"].str.replace(",", "").astype(int)
+        # Aggregate the data by summing the hours viewed for each genre
+        genre_sum = df_genre.groupby("Genre")["Hours Viewed"].sum().reset_index()
+        # Sort the DataFrame by the sum of hours viewed in descending order
+        genre_sum_sorted = genre_sum.sort_values(by="Hours Viewed", ascending=False)
+        # Create the plot
+        fig_genre = go.Figure(
+            data=[go.Bar(
+                x=genre_sum_sorted["Genre"],  # X-axis: Genre
+                y=genre_sum_sorted["Hours Viewed"],  # Y-axis: Sum of Hours Viewed
+                name="Total Hours Viewed"
+            )]
+        )
+        # Update layout
+        fig_genre.update_layout(
+            title="Total Hours Viewed by Genre",
+            xaxis_title="Genre",
+            yaxis_title="Total Hours Viewed",
+            yaxis=dict(range=[0, genre_sum_sorted["Hours Viewed"].max() + 1000000])  # Adjusting y-axis range
+        )
+        # Display the plot
+        st.plotly_chart(fig_genre)
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
