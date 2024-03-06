@@ -83,6 +83,28 @@ def create_netflix_subscription_breakdown_chart(df_netflix_data):
 
     return fig_netflix
 
+def create_netflix_subscription_growth_chart(df_netflix_data, df_sub):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], 
+                             y=df_netflix_data['Sub Increase Q2Q M'], 
+                             mode='lines+markers', 
+                             name='Netflix',
+                             line=dict(color='red')))
+
+    fig.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Disney + Sub Change Q2Q'],
+                             mode='lines+markers', name='Disney+',
+                             line=dict(color='blue')))
+
+    fig.update_layout(
+        title_text='Netflix Sub Growth Over Time',
+        xaxis_title='Quarter',
+        yaxis_title='Sub Increase in millions',
+        height=370
+    )
+
+    return fig
+
 def create_genre_breakdown_charts(df_genre):
     # Create the plot for total hours viewed by genre
     genre_sum = df_genre.groupby("Genre")["Hours Viewed"].sum().reset_index()
@@ -171,6 +193,7 @@ def main():
             df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv")
             if df_netflix_data is not None:
                 st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+                st.plotly_chart(create_netflix_subscription_growth_chart(df_netflix_data, df_sub))
             else:
                 st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
         else:
