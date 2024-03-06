@@ -193,6 +193,7 @@ def main():
             df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv")
             if df_netflix_data is not None:
                 st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+                st.write("Analysis about how the most related variable to netflix seems to be Disney+.")
                 st.plotly_chart(create_netflix_subscription_growth_chart(df_netflix_data, df_sub))
             else:
                 st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
