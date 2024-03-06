@@ -37,27 +37,51 @@ def create_subscription_growth_chart(df_sub):
 
     return fig_sub
 
-def create_netflix_subscription_growth_chart(df_netflix_data, df_sub):
-    fig = go.Figure()
+def create_netflix_subscription_breakdown_chart(df_netflix_data):
+    fig_netflix = go.Figure()
 
-    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], 
-                             y=df_netflix_data['Sub Increase Q2Q M'], 
-                             mode='lines+markers', 
-                             name='Netflix',
-                             line=dict(color='red')))
+    fig_netflix.add_trace(go.Scatter(x=df_netflix_data['Quarter'], y=df_netflix_data['Sub Increase Q2Q M'],
+                                     mode='lines+markers', name='Netflix', line=dict(color='red')))
 
-    fig.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Disney + Sub Change Q2Q'],
-                             mode='lines+markers', name='Disney+',
-                             line=dict(color='blue')))
-
-    fig.update_layout(
-        title_text='Netflix Sub Growth Over Time',
-        xaxis_title='Quarter',
-        yaxis_title='Sub Increase in millions',
-        height=370
+    fig_netflix.add_shape(
+        go.layout.Shape(
+            type="rect",
+            x0='19Q4',
+            y0=0,
+            x1='20Q2',
+            y1=16,
+            fillcolor="rgba(0, 0, 255, 0.15)",
+            line=dict(color="rgba(255, 0, 0, 0.5)"),
+        )
     )
 
-    return fig
+    fig_netflix.add_annotation(
+        go.layout.Annotation(
+            x='19Q4',
+            y=15,
+            xref="x",
+            yref="y",
+            text="COVID-19 Pandemic",
+            showarrow=True,
+            arrowhead=2,
+            ax=-100,
+            ay=-40
+        )
+    )
+
+    price_hike_quarters = df_netflix_data[df_netflix_data['Price Hike for at least 1 plan'] == True]['Quarter']
+    fig_netflix.add_trace(go.Scatter(x=price_hike_quarters,
+                                     y=df_netflix_data.loc[df_netflix_data['Price Hike for at least 1 plan'] == True, 'Sub Increase Q2Q M'],
+                                     mode='markers', name='Price Hike for at least 1 plan',
+                                     marker=dict(symbol='x', size=13, color='black')))
+
+    fig_netflix.add_trace(go.Scatter(x=['23Q1'], y=[df_netflix_data.loc[df_netflix_data['Quarter'] == '23Q1', 'Sub Increase Q2Q M'].iloc[0]],
+                                     mode='markers', name='Password Sharing Crackdown',
+                                     marker=dict(symbol='circle', size=10, color='blue')))
+
+    fig_netflix.update_layout(title_text='Detailed Netflix Subscription Timeline',xaxis_title='Quarter', yaxis_title='Sub Increase in millions', height=370)
+
+    return fig_netflix
 
 def create_genre_breakdown_charts(df_genre):
     # Create the plot for total hours viewed by genre
@@ -141,12 +165,14 @@ def main():
         # Fetch data from GitHub for subscription change over quarters
         df_sub = fetch_data_from_github(github_url)
         if df_sub is not None:
-            # Fetch data from local file for Netflix subscription breakdown
-            df_netflix_data = pd.read_csv("just_netflix_data_csv_error_tester.csv")
+            st.plotly_chart(create_subscription_growth_chart(df_sub))
+
+            # Fetch data from GitHub for Netflix subscription breakdown
+            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv")
             if df_netflix_data is not None:
-                st.plotly_chart(create_netflix_subscription_growth_chart(df_netflix_data, df_sub))
+                st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
             else:
-                st.warning("Please provide the local file path for Netflix subscription breakdown data.")
+                st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
         else:
             st.warning("Please provide the GitHub URL for subscription change over quarters data.")
 
