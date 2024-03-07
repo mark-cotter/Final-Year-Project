@@ -208,6 +208,19 @@ def create_users_breakdown_histogram(df_users):
 
     return fig
 
+def create_gender_distribution_pie_chart(df_users):
+    gender_counts = df_users['Gender'].value_counts()
+    fig = go.Figure(data=[go.Pie(labels=gender_counts.index, values=gender_counts)])
+
+    # Update layout
+    fig.update_layout(
+        title="Gender Distribution",
+        height=500,
+        width=700
+    )
+
+    return fig
+
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
@@ -264,6 +277,10 @@ def main():
         df_users = pd.read_csv("Netflix Userbase.csv")
         fig_users_histogram = create_users_breakdown_histogram(df_users)
         st.plotly_chart(fig_users_histogram)
+
+        # Add pie chart for gender distribution
+        fig_gender_distribution = create_gender_distribution_pie_chart(df_users)
+        st.plotly_chart(fig_gender_distribution)
 
 if __name__ == "__main__":
     main()
