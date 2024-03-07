@@ -174,10 +174,31 @@ def create_region_breakdown_chart(df_region):
 
     return fig
 
+
+def create_mean_duration_graph(df_movies):
+    df_movies["duration"] = df_movies["duration"].str.replace(' min', '')
+    df_movies["duration"] = df_movies["duration"].astype(int)
+
+    df_movies['date_added'] = pd.to_datetime(df_movies['date_added'])
+    df_movies = df_movies[df_movies['date_added'].dt.year >= 2015]
+    mean_duration = df_movies.groupby(df_movies['date_added'].dt.to_period('M'))['duration'].mean().reset_index()
+    mean_duration['date_added'] = mean_duration['date_added'].astype(str)
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=mean_duration['date_added'], y=mean_duration['duration'], mode='lines+markers', name='Mean Duration',
+                             line=dict(color='blue', width=2)))
+
+    fig.update_layout(title='Mean Duration of Netflix Movies by Month Added (Since 2015)',
+                      xaxis_title='Month Added',
+                      yaxis_title='Mean Duration (minutes)')
+
+    return fig
+
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
@@ -216,6 +237,14 @@ def main():
         df_region = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/d2608fd649be8cd2367a4a5a8c694651766c14e3/netflix_region_breakdown.csv")
         if df_region is not None:
             st.plotly_chart(create_region_breakdown_chart(df_region))
+
+    elif selected_tab == "Content Breakdown":
+        # Load Netflix movie details data
+        df_netflix_movies_data = pd.read_csv("Netflix_movie_details.csv")
+        # Create mean duration graph
+        mean_duration_fig = create_mean_duration_graph(df_netflix_movies_data)
+        # Display the graph
+        st.plotly_chart(mean_duration_fig)
 
 if __name__ == "__main__":
     main()
