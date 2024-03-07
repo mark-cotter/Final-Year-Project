@@ -221,6 +221,35 @@ def create_gender_distribution_pie_chart(df_users):
 
     return fig
 
+def create_subscription_pie_chart(df):
+    import plotly.graph_objects as go
+    
+    subscription_counts = df['Subscription Type'].value_counts()
+    
+    fig = go.Figure(data=[go.Pie(labels=subscription_counts.index, values=subscription_counts, textinfo='label+percent')])
+
+    custom_text = []
+    for label in subscription_counts.index:
+        if label == 'Basic':
+            custom_text.append('$7 a month')
+        elif label == 'Standard':
+            custom_text.append('$10 a month')
+        elif label == 'Premium':
+            custom_text.append('$15 a month')
+        else:
+            custom_text.append('')
+
+    fig.update_traces(text=custom_text, textposition='inside', textinfo='text+percent')
+
+    fig.update_layout(
+        title="Subscription Type Distribution",
+        height=500,
+        width=700
+    )
+
+    return fig
+
+
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
@@ -281,6 +310,10 @@ def main():
         # Add pie chart for gender distribution
         fig_gender_distribution = create_gender_distribution_pie_chart(df_users)
         st.plotly_chart(fig_gender_distribution)
+        
+        # Add pie chart for subscription type distribution
+        fig_subscription_distribution = create_subscription_pie_chart(df_users)
+        st.plotly_chart(fig_subscription_distribution)
 
 if __name__ == "__main__":
     main()
