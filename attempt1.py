@@ -249,6 +249,29 @@ def create_subscription_pie_chart(df):
 
     return fig
 
+def create_subscription_revenue_bar_chart(df):
+    import plotly.graph_objects as go
+    
+    grouped_df = df.groupby('Subscription Type')['Monthly Revenue'].sum().reset_index()
+
+    fig = go.Figure(data=[go.Bar(
+        x=grouped_df['Subscription Type'],
+        y=grouped_df['Monthly Revenue'],
+        marker_color='skyblue'
+    )])
+
+    # Update layout
+    fig.update_layout(
+        title="Monthly Revenue by Subscription Type",
+        xaxis_title="Subscription Type",
+        yaxis_title="Monthly Revenue",
+        height=500,
+        width=700
+    )
+
+    return fig
+
+
 
 def main():
     st.sidebar.title("Navigation")
@@ -314,6 +337,10 @@ def main():
         # Add pie chart for subscription type distribution
         fig_subscription_distribution = create_subscription_pie_chart(df_users)
         st.plotly_chart(fig_subscription_distribution)
+        
+        # Add bar chart for subscription revenue
+        fig_subscription_revenue = create_subscription_revenue_bar_chart(df_users)
+        st.plotly_chart(fig_subscription_revenue)
 
 if __name__ == "__main__":
     main()
