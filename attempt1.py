@@ -195,10 +195,23 @@ def create_mean_duration_graph(df_movies):
 
     return fig
 
+
+def create_users_breakdown_histogram(df_users):
+    fig = go.Figure(data=[go.Histogram(x=df_users["Age"])])
+
+    # Update layout
+    fig.update_layout(
+        title="Users Age Breakdown",
+        xaxis_title="Age",
+        yaxis_title="Frequency"
+    )
+
+    return fig
+
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
@@ -245,6 +258,12 @@ def main():
         mean_duration_fig = create_mean_duration_graph(df_netflix_movies_data)
         # Display the graph
         st.plotly_chart(mean_duration_fig)
+    
+    elif selected_tab == "Users Breakdown":
+        # Load user data and create histogram
+        df_users = pd.read_csv("Netflix Userbase.csv")
+        fig_users_histogram = create_users_breakdown_histogram(df_users)
+        st.plotly_chart(fig_users_histogram)
 
 if __name__ == "__main__":
     main()
