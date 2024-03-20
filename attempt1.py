@@ -289,7 +289,7 @@ def main():
             st.plotly_chart(create_subscription_growth_chart(df_sub))
 
             # Fetch data from GitHub for Netflix subscription breakdown
-            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/30874f3e1a3e36c2aa44f4bd5101818dbd7b1724/just_netflix_data_csv_error_tester.csv")
+            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/7e1d70c4258cea70be33c23df05de7caca6719b9/just_netflix_data.csv")
             if df_netflix_data is not None:
                 st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
                 st.write("## Analysis")
