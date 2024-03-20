@@ -113,7 +113,7 @@ def plot_netflix_stock_growth(df_data):
 
     fig.add_trace(go.Scatter(
         x=df_data['Quarter'],
-        y=df_data['Netflix Stock Change Q2Q %'] / 100,
+        y=df_data['Netflix Stock Change Q2Q %'],
         mode='lines+markers',
         name='Netflix',
         line=dict(color='red')
@@ -121,7 +121,7 @@ def plot_netflix_stock_growth(df_data):
 
     fig.add_trace(go.Scatter(
         x=df_data['Quarter'],
-        y=df_data['NASDAQ Change Q2Q %'] / 100,
+        y=df_data['NASDAQ Change Q2Q %'],
         mode='lines+markers',
         name='NASDAQ',
         line=dict(color='blue')
@@ -130,7 +130,7 @@ def plot_netflix_stock_growth(df_data):
     # Add marker for x = "20Q1"
     fig.add_trace(go.Scatter(
         x=["20Q1"],
-        y=[df_data.loc[df_data['Quarter'] == "20Q1", 'Netflix Stock Change Q2Q %'].iloc[0]] / 100,  # Get the corresponding y value
+        y=[df_data.loc[df_data['Quarter'] == "20Q1", 'Netflix Stock Change Q2Q %'].iloc[0]],  # Get the corresponding y value
         mode='markers',
         name='Covid-19 Beginning',
         marker=dict(color='green', size=15, symbol="cross")
