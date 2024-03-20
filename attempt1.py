@@ -105,6 +105,48 @@ def create_netflix_subscription_growth_chart(df_netflix_data, df_sub):
 
     return fig
 
+def plot_netflix_stock_growth(df_data):
+    needed_quarters = ["18Q2", "18Q3", "18Q4", "19Q1", "19Q2", "19Q3", "19Q4", "20Q1", "20Q2"]
+    df_data = df_data[df_data["Quarter"].isin(needed_quarters)]
+    
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=df_data['Quarter'],
+        y=df_data['Netflix Stock Change Q2Q %'],
+        mode='lines+markers',
+        name='Netflix',
+        line=dict(color='red')
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=df_data['Quarter'],
+        y=df_data['NASDAQ Change Q2Q %'],
+        mode='lines+markers',
+        name='NASDAQ',
+        line=dict(color='blue')
+    ))
+
+    # Add marker for x = "20Q1"
+    fig.add_trace(go.Scatter(
+        x=["20Q1"],
+        y=[df_data.loc[df_data['Quarter'] == "20Q1", 'Netflix Stock Change Q2Q %'].iloc[0]],  # Get the corresponding y value
+        mode='markers',
+        name='Covid-19 Beginning',
+        marker=dict(color='green', size=15, symbol="cross")
+    ))
+
+    fig.update_layout(
+        title_text='Netflix Stock Growth Over Quarters',
+        xaxis_title='Quarter',
+        yaxis_title='Stock Increase Percentage',
+        yaxis=dict(tickformat=".1%"),
+        height=370
+    )
+
+    st.plotly_chart(fig)
+
+
 def create_genre_breakdown_charts(df_genre):
     # Create the plot for total hours viewed by genre
     genre_sum = df_genre.groupby("Genre")["Hours Viewed"].sum().reset_index()
@@ -295,10 +337,15 @@ def main():
                 st.write("## Analysis")
                 st.write("Analysis about how the most related variable to netflix seems to be Disney+.")
                 st.plotly_chart(create_netflix_subscription_growth_chart(df_netflix_data, df_sub))
+
+                # Plot Netflix stock growth
+                plot_netflix_stock_growth(df_netflix_data)
+                
             else:
                 st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
         else:
             st.warning("Please provide the GitHub URL for subscription change over quarters data.")
+
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
