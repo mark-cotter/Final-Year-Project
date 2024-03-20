@@ -140,7 +140,7 @@ def plot_netflix_stock_growth(df_data):
         title_text='Netflix Stock Growth Over Quarters',
         xaxis_title='Quarter',
         yaxis_title='Stock Increase Percentage',
-        yaxis=dict(tickformat=".1%"),
+        yaxis=dict(tickformat="%"),
         height=370
     )
 
