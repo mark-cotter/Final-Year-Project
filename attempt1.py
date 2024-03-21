@@ -314,6 +314,20 @@ def create_subscription_revenue_bar_chart(df):
     return fig
 
 
+def plot_Q4_sub_growth(df_netflix_data):
+    q4_mask = df_netflix_data['Just Quarter Value'] == 'Q4'
+    
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], y=df_netflix_data['Sub Increase Q2Q M'],
+                             mode='lines+markers', name='Netflix', line=dict(color='red')))
+    fig.add_trace(go.Scatter(x=df_netflix_data[q4_mask]['Quarter'], y=df_netflix_data[q4_mask]['Sub Increase Q2Q M'],
+                             mode='markers', name='Q4', marker=dict(color='blue', size=10, symbol='cross')))
+    
+    # Update layout
+    fig.update_layout(title='Netflix Subscription Increase Q2Q M', xaxis_title='Quarter', yaxis_title='Subscription Increase')
+    
+    # Display the plot
+    st.plotly_chart(fig)
 
 def main():
     st.sidebar.title("Navigation")
@@ -356,6 +370,8 @@ def main():
             The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
             quarters.
             """)
+            plot_Q4_sub_growth(df_netflix_data)
+
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
