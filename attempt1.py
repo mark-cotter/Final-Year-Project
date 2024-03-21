@@ -324,7 +324,7 @@ def plot_Q4_sub_growth(df_netflix_data):
                              mode='markers', name='Q4', marker=dict(color='blue', size=10, symbol='cross')))
     
     # Update layout
-    fig.update_layout(title='Netflix Subscription Increase Q2Q M', xaxis_title='Quarter', yaxis_title='Subscription Increase')
+    fig.update_layout(title='Netflix Q4 Subscription Increase', xaxis_title='Quarter', yaxis_title='Subscription Increase')
     
     # Display the plot
     st.plotly_chart(fig)
