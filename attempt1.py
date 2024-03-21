@@ -366,7 +366,7 @@ def main():
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
             st.write("## General Observations")
-            st.write("#Q4")
+            st.write("###Q4")
             st.markdown("""
             The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
             quarters.
