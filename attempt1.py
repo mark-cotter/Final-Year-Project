@@ -351,6 +351,7 @@ def main():
         df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/36156782889be154d42b551b11fa36e4e24085ac/just_netflix_data.csv")
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+            st.write("## General Observations")
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
