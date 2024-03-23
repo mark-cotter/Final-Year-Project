@@ -433,7 +433,7 @@ def main():
             st.plotly_chart(create_subscription_growth_chart(df_sub))
 
             # Fetch data from GitHub for Netflix subscription breakdown
-            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/3e485a5580416a6c01b690e526e5cdc8c3aecc1d/just_netflix_data.csv")
+            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
             if df_netflix_data is not None:
                 st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
                 st.write("## Analysis")
@@ -450,7 +450,7 @@ def main():
 
     elif selected_tab == "Placeholder":
         # Fetch data from GitHub for Netflix subscription breakdown
-        df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/3e485a5580416a6c01b690e526e5cdc8c3aecc1d/just_netflix_data.csv")
+        df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
             st.write("## General Observations From the Graph")
