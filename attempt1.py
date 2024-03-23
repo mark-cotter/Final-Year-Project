@@ -507,6 +507,7 @@ def main():
             I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
             quarter
             """)
+            st.image("Netflix Price Hikes Screenshot.png")
             
 
     elif selected_tab == "Genre Breakdown":
