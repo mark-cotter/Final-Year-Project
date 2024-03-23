@@ -369,6 +369,41 @@ def plot_lockdown_effect(df_netflix_data):
 
     return fig
 
+def plot_netflix_sub_growth_v_price_hikes(df_netflix_data):
+    # Create a Plotly figure
+    fig = go.Figure()
+
+    # Add trace for Netflix subscription growth
+    fig.add_trace(go.Scatter(
+        x=df_netflix_data['Quarter'],
+        y=df_netflix_data['Sub Increase Q2Q M'],
+        mode='lines+markers',
+        name='Netflix',
+        line=dict(color='red')
+    ))
+
+    # Add markers for price hike quarters
+    price_hike_quarters = df_netflix_data[df_netflix_data['Price Hike for at least 1 plan'] == True]['Quarter']
+    fig.add_trace(go.Scatter(
+        x=price_hike_quarters,
+        y=df_netflix_data.loc[df_netflix_data['Price Hike for at least 1 plan'] == True, 'Sub Increase Q2Q M'],
+        mode='markers',
+        name='Price Hike for at least 1 plan',
+        marker=dict(symbol='x', size=13, color='black')
+    ))
+
+    # Update layout
+    fig.update_layout(
+        title_text='Netflix Sub Growth Over Time',
+        xaxis_title='Quarter',
+        yaxis_title='Sub Increase in millions',
+        height=370
+    )
+
+    # Render the figure in Streamlit
+    st.plotly_chart(fig)
+
+
 
 def main():
     # Add CSS to set the theme to light mode
@@ -458,6 +493,7 @@ def main():
             the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
             lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
             """)
+            st.plotly_chart(plot_netflix_sub_growth_v_price_hikes(df_netflix_data))
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
