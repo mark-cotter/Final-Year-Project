@@ -427,7 +427,7 @@ def main():
             plot_Q4_sub_growth(df_netflix_data)
             st.markdown("""
             I wanted to see if these differences were statistcally significant so I did an ANOVA (Analysis of Variance) Test in R to
-            see if the mean values of Q4 and other quarters were signifcantly different
+            see if the mean values of Q4 and other quarters were signifcantly different.
             """)
             st.image("https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png")
             st.markdown("""
@@ -435,16 +435,19 @@ def main():
             me to reject the null hypothesis that the quarters are not significantly different.
 
             The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
-            months due to the worse weather and more time off from work for holidays
+            months due to the worse weather and more time off from work for holidays.
             """)
             st.write("### Effect of Covid 19 Lockdown")
             st.markdown("""
             Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
-            lockdown which forced everyone into their homes in 2020
+            lockdown which forced everyone into their homes in 2020.
             """)
             df_netflix_data = pd.read_csv("just_netflix_data.csv")
             st.plotly_chart(plot_lockdown_effect(df_netflix_data))
-
+            st.markdown("""
+            The above chart shows the level of lockdown that was active in each quarter. I now want to see if the different lockdowns 
+            had effects on the number of subscriptions.
+            """)
 
 
     elif selected_tab == "Genre Breakdown":
