@@ -505,9 +505,15 @@ def main():
             plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
             st.markdown("""
             I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
-            quarter
+            quarter.
             """)
             st.image("Netflix Price Hikes Screenshot.png")
+            st.markdown("""
+            The above R output from an ANOVA test with a p value of 0.77 which is well above the 5% significance level shows that
+            these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
+            sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
+            otherwise.
+            """)
             
 
     elif selected_tab == "Genre Breakdown":
