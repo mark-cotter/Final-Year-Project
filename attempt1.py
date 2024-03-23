@@ -453,7 +453,7 @@ def main():
         df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/3e485a5580416a6c01b690e526e5cdc8c3aecc1d/just_netflix_data.csv")
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
-            st.write("## General Observations")
+            st.write("## General Observations From the Graph")
             st.write("### Q4")
             st.markdown("""
             The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
@@ -492,6 +492,14 @@ def main():
             lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
             the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
             lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
+
+            
+            """)
+            st.write("## Exploratory Analysis ")
+            st.write("### Price Hikes")
+            st.markdown("""
+            Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
+            of subscribers. The graph below shows the quarters where Netflix increased the prices on at least 1 plan. 
             """)
             plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
 
