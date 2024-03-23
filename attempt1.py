@@ -394,7 +394,7 @@ def plot_netflix_sub_growth_v_price_hikes(df_netflix_data):
 
     # Update layout
     fig.update_layout(
-        title_text='Netflix Sub Growth Over Time',
+        title_text='Netflix Price Hikes Effect',
         xaxis_title='Quarter',
         yaxis_title='Sub Increase in millions',
         height=370
