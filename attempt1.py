@@ -499,9 +499,15 @@ def main():
             st.write("### Price Hikes")
             st.markdown("""
             Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
-            of subscribers. The graph below shows the quarters where Netflix increased the prices on at least 1 plan. 
+            of subscribers as these increases are very controversial on social media when they're done. The graph below shows the 
+            quarters where Netflix increased the prices on at least 1 plan. 
             """)
             plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
+            st.markdown("""
+            I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
+            quarter
+            """)
+            
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
