@@ -401,6 +401,8 @@ def main():
             Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
             lockdown which forced everyone into their homes in 2020
             """)
+            df_netflix_data = pd.read_csv("just_netflix_data.csv")
+            st.plotly_chart(plot_lockdown_effect(df_netflix_data))
 
 
 
