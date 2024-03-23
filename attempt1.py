@@ -384,7 +384,18 @@ def main():
             quarters.
             """)
             plot_Q4_sub_growth(df_netflix_data)
+            st.markdown("""
+            I wanted to see if these differences were statistcally significant so I did an ANOVA (Analysis of Variance) Test in R to
+            see if the mean values of Q4 and other quarters were signifcantly different
+            """)
             st.image("https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png")
+            st.markdown("""
+            The above output from the test in R has a highlighted p value of 0.02. This is lower than the 5% level of significance which allows
+            me to reject the null hypothesis that the quarters are not significantly different.
+
+            The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
+            months due to the worse weather and more time off from work for holidays
+            """)
 
 
     elif selected_tab == "Genre Breakdown":
