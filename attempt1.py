@@ -396,6 +396,12 @@ def main():
             The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
             months due to the worse weather and more time off from work for holidays
             """)
+            st.write("### Effect of Covid 19 Lockdown")
+            st.markdown("""
+            Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
+            lockdown which forced everyone into their homes in 2020
+            """)
+
 
 
     elif selected_tab == "Genre Breakdown":
