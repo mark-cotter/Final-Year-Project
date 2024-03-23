@@ -448,6 +448,7 @@ def main():
             The above chart shows the level of lockdown that was active in each quarter. I now want to see if the different lockdowns 
             had effects on the number of subscriptions.
             """)
+            st.image("Covid 19 Lockdown FYP.png")
 
 
     elif selected_tab == "Genre Breakdown":
