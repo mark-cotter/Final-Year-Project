@@ -330,6 +330,7 @@ def plot_Q4_sub_growth(df_netflix_data):
     st.plotly_chart(fig)
 
 def main():
+    st.set_page_config(theme='light')
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
     tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder"]
