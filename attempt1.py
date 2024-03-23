@@ -449,7 +449,15 @@ def main():
             had effects on the number of subscriptions.
             """)
             st.image("Covid 19 Lockdown FYP.png")
+            st.markdown("""
+            I used another ANOVA test to compare the means of the 3 groups and then used Tukeys HSD (Honest Significant Difference)
+            to quantify the differences and see if they were statistically significant.
 
+            As you can see from the p values Strong lockdown is signifcantly different from the other 2. This makes sense as a strong
+            lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
+            the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
+            lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
+            """)
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
