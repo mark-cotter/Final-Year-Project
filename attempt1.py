@@ -329,6 +329,47 @@ def plot_Q4_sub_growth(df_netflix_data):
     # Display the plot
     st.plotly_chart(fig)
 
+def plot_lockdown_effect(df_netflix_data):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], y=df_netflix_data['Sub Increase Q2Q M'], mode='lines+markers', name='Netflix',
+                             line=dict(color='red')))
+
+    fig.add_annotation(
+        go.layout.Annotation(
+            x='20Q1',
+            y=15,
+            xref="x",
+            yref="y",
+            text="Beginning of COVID-19 Pandemic",
+            showarrow=True,
+            arrowhead=2,
+            ax=-100,
+            ay=-40
+        )
+    )
+
+    # Add markers for each level of lockdown separately
+    fig.add_trace(go.Scatter(x=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'No Lockdown']['Quarter'],
+                             y=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'No Lockdown']['Sub Increase Q2Q M'],
+                             mode='markers', marker=dict(color='green', size=10), name='No Lockdown'))
+
+    fig.add_trace(go.Scatter(x=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'Weak Lockdown']['Quarter'],
+                             y=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'Weak Lockdown']['Sub Increase Q2Q M'],
+                             mode='markers', marker=dict(color='yellow', size=10), name='Weak Lockdown'))
+
+    fig.add_trace(go.Scatter(x=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'Strong Lockdown']['Quarter'],
+                             y=df_netflix_data[df_netflix_data['Level of Lockdown'] == 'Strong Lockdown']['Sub Increase Q2Q M'],
+                             mode='markers', marker=dict(color='red', size=10), name='Strong Lockdown'))
+
+    fig.update_layout(title_text='Effect of Lockdown on Netflix Sub Growth',
+                      xaxis_title='Quarter',
+                      yaxis_title='Sub Increase in millions',
+                      height=370)
+
+    return fig
+
+
 def main():
     # Add CSS to set the theme to light mode
     st.markdown(
