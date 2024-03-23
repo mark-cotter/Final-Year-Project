@@ -493,7 +493,7 @@ def main():
             the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
             lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
             """)
-            st.plotly_chart(plot_netflix_sub_growth_v_price_hikes(df_netflix_data))
+            plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
