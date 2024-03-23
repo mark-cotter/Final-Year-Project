@@ -384,6 +384,7 @@ def main():
             quarters.
             """)
             plot_Q4_sub_growth(df_netflix_data)
+            st.image(https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png)
 
 
     elif selected_tab == "Genre Breakdown":
