@@ -557,19 +557,18 @@ def main():
             sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
             otherwise.
             """)
-            st.write("### Password Sharing Crackdown effects")
-            st.markdown("""
-            The above R output from an ANOVA test with a p value of 0.77 which is well above the 5% significance level shows that
-            these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
-            sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
-            otherwise.
-            """)
             st.write("### Price Effect of Password Sharing Crackdown")
             st.markdown("""
             One motivation for this project was to see how Netflix performed after introducing its very controversial crackdown on
-            peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change.
+            peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change since
+            the public consensus was that people would refuse to buy new accounts when they lost access to the old one.
             """)
             plot_password_sharing_crackdown_effect(df_netflix_data)
+            st.markdown("""
+            As you can see from the above graph this change seems to have the opposite effect from what was expected.
+            The trend after introducing the crackdown is positive and I will now test to see if this trend is singnificantly
+            different from before introducing the crackdown.
+            """)
             
             
 
