@@ -404,6 +404,49 @@ def plot_netflix_sub_growth_v_price_hikes(df_netflix_data):
     st.plotly_chart(fig)
 
 
+def plot_password_sharing_crackdown_effect(df_netflix_data):
+    
+    # Create the plot
+    fig = go.Figure()
+    
+    # Add the main trace (Netflix subscription growth)
+    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], 
+                             y=df_netflix_data['Sub Increase Q2Q M'], 
+                             mode='lines+markers', 
+                             name='Netflix',
+                             line=dict(color='red'),
+                             showlegend=True))
+    
+    # Add a vertical rectangle to highlight the period of password sharing crackdown
+    fig.add_vrect(x0='23Q1', x1=df_netflix_data['Quarter'].max(),
+                  fillcolor="rgba(0,0,255,0.2)", layer="below", line_width=0)
+    
+    # Add an annotation to mark the password sharing crackdown
+    fig.add_annotation(
+        go.layout.Annotation(
+            x='23Q1',
+            y=10,  # Adjust the y-position as needed
+            xref="x",
+            yref="y",
+            text="Password Sharing Crackdown",
+            showarrow=True,
+            arrowhead=2,
+            ax=-70,
+            ay=-30
+        )
+    )
+
+    # Update layout
+    fig.update_layout(title_text='Effect of Password Sharing Crackdown on Sub Growth',
+                      xaxis_title='Quarter',
+                      yaxis_title='Sub Increase in millions',
+                      height=370,
+                      showlegend=True)
+
+    # Display the plot in Streamlit
+    st.plotly_chart(fig)
+
+
 
 def main():
     # Add CSS to set the theme to light mode
@@ -514,6 +557,20 @@ def main():
             sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
             otherwise.
             """)
+            st.write("### Password Sharing Crackdown effects")
+            st.markdown("""
+            The above R output from an ANOVA test with a p value of 0.77 which is well above the 5% significance level shows that
+            these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
+            sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
+            otherwise.
+            """)
+            st.write("### Price Effect of Password Sharing Crackdown")
+            st.markdown("""
+            One motivation for this project was to see how Netflix performed after introducing its very controversial crackdown on
+            peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change.
+            """)
+            plot_password_sharing_crackdown_effect(df_netflix_data)
+            
             
 
     elif selected_tab == "Genre Breakdown":
