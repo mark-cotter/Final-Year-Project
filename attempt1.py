@@ -569,6 +569,15 @@ def main():
             The trend after introducing the crackdown is positive and I will now test to see if this trend is singnificantly
             different from before introducing the crackdown.
             """)
+            st.image("Password Sharing Test.png")
+            st.markdown("""
+            I performed a chow test which test if the values after a certain break point are significantly different compared to
+            before it. As you can see although it is close the above p value is below the 5% level of significance causing us to
+            reject eh null hypothesis that there is no difference before and after introducing the crackdown.
+
+            This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
+            own account instead of sharing it with someone has offset the bad publicity from the decision.
+            """)
             
             
 
