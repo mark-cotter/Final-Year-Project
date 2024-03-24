@@ -556,6 +556,7 @@ def main():
             these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
             sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
             otherwise.
+            
             """)
             st.write("### Price Effect of Password Sharing Crackdown")
             st.markdown("""
