@@ -446,6 +446,27 @@ def plot_password_sharing_crackdown_effect(df_netflix_data):
     # Display the plot in Streamlit
     st.plotly_chart(fig)
 
+def Q4_analysis(df_netflix_data):
+    st.write("### Q4")
+    st.markdown("""
+        The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
+        quarters.
+        """)
+    plot_Q4_sub_growth(df_netflix_data)
+    st.markdown("""
+        I wanted to see if these differences were statistcally significant so I did an ANOVA (Analysis of Variance) Test in R to
+        see if the mean values of Q4 and other quarters were signifcantly different.
+        """)
+    st.image("https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png")
+    st.markdown("""
+        The above output from the test in R has a highlighted p value of 0.02. This is lower than the 5% level of significance which allows
+        me to reject the null hypothesis that the quarters are not significantly different.
+
+        The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
+        months due to the worse weather and more time off from work for holidays.
+        """)
+
+
 
 
 def main():
@@ -486,25 +507,7 @@ def main():
         df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
-            st.write("## General Observations From the Graph")
-            st.write("### Q4")
-            st.markdown("""
-            The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
-            quarters.
-            """)
-            plot_Q4_sub_growth(df_netflix_data)
-            st.markdown("""
-            I wanted to see if these differences were statistcally significant so I did an ANOVA (Analysis of Variance) Test in R to
-            see if the mean values of Q4 and other quarters were signifcantly different.
-            """)
-            st.image("https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png")
-            st.markdown("""
-            The above output from the test in R has a highlighted p value of 0.02. This is lower than the 5% level of significance which allows
-            me to reject the null hypothesis that the quarters are not significantly different.
-
-            The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
-            months due to the worse weather and more time off from work for holidays.
-            """)
+            Q4_analysis(df_netflix_data)
             st.write("### Effect of Covid 19 Lockdown")
             st.markdown("""
             Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
