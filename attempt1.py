@@ -466,6 +466,27 @@ def Q4_analysis(df_netflix_data):
         months due to the worse weather and more time off from work for holidays.
         """)
 
+def Covid_19_Analysis(df_netflix_data):
+    st.write("### Effect of Covid 19 Lockdown")
+    st.markdown("""
+        Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
+        lockdown which forced everyone into their homes in 2020.
+        """)
+    st.plotly_chart(plot_lockdown_effect(df_netflix_data))
+    st.markdown("""
+        The above chart shows the level of lockdown that was active in each quarter. I now want to see if the different lockdowns 
+        had effects on the number of subscriptions.
+        """)
+    st.image("Covid 19 Lockdown FYP.png")
+    st.markdown("""
+        I used another ANOVA test to compare the means of the 3 groups and then used Tukeys HSD (Honest Significant Difference)
+        to quantify the differences and see if they were statistically significant.
+
+        As you can see from the p values Strong lockdown is signifcantly different from the other 2. This makes sense as a strong
+        lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
+        the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
+        lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
+        """)
 
 
 
@@ -508,30 +529,7 @@ def main():
         if df_netflix_data is not None:
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
             Q4_analysis(df_netflix_data)
-            st.write("### Effect of Covid 19 Lockdown")
-            st.markdown("""
-            Another aspect that stood out is the peak of the graph at 20Q1. This could likely be explained by the Covid 19 Pandemic
-            lockdown which forced everyone into their homes in 2020.
-            """)
-            df_netflix_data = pd.read_csv("just_netflix_data.csv")
-            st.plotly_chart(plot_lockdown_effect(df_netflix_data))
-            st.markdown("""
-            The above chart shows the level of lockdown that was active in each quarter. I now want to see if the different lockdowns 
-            had effects on the number of subscriptions.
-            """)
-            st.image("Covid 19 Lockdown FYP.png")
-            st.markdown("""
-            I used another ANOVA test to compare the means of the 3 groups and then used Tukeys HSD (Honest Significant Difference)
-            to quantify the differences and see if they were statistically significant.
-
-            As you can see from the p values Strong lockdown is signifcantly different from the other 2. This makes sense as a strong
-            lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
-            the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
-            lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
-
-            
-            """)
-            st.write("## Exploratory Analysis ")
+            Covid_19_Analysis(df_netflix_data)
             st.write("### Price Hikes")
             st.markdown("""
             Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
