@@ -450,17 +450,7 @@ def plot_password_sharing_crackdown_effect(df_netflix_data):
 
 def main():
     # Add CSS to set the theme to light mode
-    st.markdown(
-        """
-        <style>
-        body {
-            color: black;
-            background-color: white;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
     tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder"]
