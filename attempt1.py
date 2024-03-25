@@ -488,6 +488,48 @@ def Covid_19_Analysis(df_netflix_data):
         lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
         """)
 
+def Price_Hikes_Analysis(df_netflix_data):
+    st.write("### Price Hikes")
+    st.markdown("""
+        Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
+        of subscribers as these increases are very controversial on social media when they're done. The graph below shows the 
+        quarters where Netflix increased the prices on at least 1 plan. 
+        """)
+    plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
+    st.markdown("""
+        I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
+        quarter.
+        """)
+    st.image("Netflix Price Hikes Screenshot.png")
+    st.markdown("""
+        The above R output from an ANOVA test with a p value of 0.77 which is well above the 5% significance level shows that
+        these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
+        sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
+        otherwise.
+        """)
+
+def Password_Sharing_Crackdown_Analysis(df_netflix_data):
+    st.write("### Effect of Password Sharing Crackdown")
+    st.markdown("""
+        One motivation for this project was to see how Netflix performed after introducing its very controversial crackdown on
+        peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change since
+        the public consensus was that people would refuse to buy new accounts when they lost access to the old one.
+        """)
+    plot_password_sharing_crackdown_effect(df_netflix_data)
+    st.markdown("""
+        As you can see from the above graph this change seems to have the opposite effect from what was expected.
+        The trend after introducing the crackdown is positive and I will now test to see if this trend is singnificantly
+        different from before introducing the crackdown.
+        """)
+    st.image("Password Sharing Test.png")
+    st.markdown("""
+        I performed a chow test which tests if the values after a certain break point are significantly different compared to
+        before it. As you can see although it is close the above p value is below the 5% level of significance causing us to
+        reject the null hypothesis that there is no difference before and after introducing the crackdown.
+
+        This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
+        own account instead of sharing it with someone has offset the bad publicity from the decision.
+        """)
 
 
 def main():
@@ -530,46 +572,8 @@ def main():
             st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
             Q4_analysis(df_netflix_data)
             Covid_19_Analysis(df_netflix_data)
-            st.write("### Price Hikes")
-            st.markdown("""
-            Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
-            of subscribers as these increases are very controversial on social media when they're done. The graph below shows the 
-            quarters where Netflix increased the prices on at least 1 plan. 
-            """)
-            plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
-            st.markdown("""
-            I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
-            quarter.
-            """)
-            st.image("Netflix Price Hikes Screenshot.png")
-            st.markdown("""
-            The above R output from an ANOVA test with a p value of 0.77 which is well above the 5% significance level shows that
-            these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
-            sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
-            otherwise.
-            
-            """)
-            st.write("### Price Effect of Password Sharing Crackdown")
-            st.markdown("""
-            One motivation for this project was to see how Netflix performed after introducing its very controversial crackdown on
-            peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change since
-            the public consensus was that people would refuse to buy new accounts when they lost access to the old one.
-            """)
-            plot_password_sharing_crackdown_effect(df_netflix_data)
-            st.markdown("""
-            As you can see from the above graph this change seems to have the opposite effect from what was expected.
-            The trend after introducing the crackdown is positive and I will now test to see if this trend is singnificantly
-            different from before introducing the crackdown.
-            """)
-            st.image("Password Sharing Test.png")
-            st.markdown("""
-            I performed a chow test which test if the values after a certain break point are significantly different compared to
-            before it. As you can see although it is close the above p value is below the 5% level of significance causing us to
-            reject eh null hypothesis that there is no difference before and after introducing the crackdown.
-
-            This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
-            own account instead of sharing it with someone has offset the bad publicity from the decision.
-            """)
+            Price_Hikes_Analysis(df_netflix_data)
+            Password_Sharing_Crackdown_Analysis(df_netflix_data)
             
             
 
