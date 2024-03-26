@@ -467,21 +467,22 @@ def plot_netflix_subscription_growth(df_netflix_data):
 def Q4_analysis(df_netflix_data):
     st.write("### Q4")
     st.markdown("""
-        The first thing I noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
+        The first thing noticed was that Q4 seems to have a consistenly higher number of new subscribers compared to the other
         quarters.
         """)
     plot_Q4_sub_growth(df_netflix_data)
     st.markdown("""
-        I wanted to see if these differences were statistcally significant so I did an ANOVA (Analysis of Variance) Test in R to
-        see if the mean values of Q4 and other quarters were signifcantly different.
+        It had to be investigated if these differences in subscription growth were statistcally significant so an ANOVA (Analysis
+        of Variance) Test in R was done to see if the mean values of Q4 compared to other quarters were signifcantly different.
         """)
     st.image("https://github.com/mark-cotter/Graph_work/raw/8d24e9ac6a05e1539b528a6c414e3845b2a49b47/R%20Screenshot%20Q4%20Test.png")
     st.markdown("""
-        The above output from the test in R has a highlighted p value of 0.02. This is lower than the 5% level of significance which allows
-        me to reject the null hypothesis that the quarters are not significantly different.
+        The above output from the test in R has a highlighted p value of 0.02. This is lower than the 5% level of significance which 
+        means the null hypothesis that there is no difference in the mean value between Q4 and the other quarters should be rejected.
 
         The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
-        months due to the worse weather and more time off from work for holidays.
+        months. This is likely due to factors such as worse weather forcing people to stay inside and more holidays from work meaning
+        people have access to more leisure time.
         """)
     st.write("")
     st.write("")
@@ -494,18 +495,20 @@ def Covid_19_Analysis(df_netflix_data):
         """)
     st.plotly_chart(plot_lockdown_effect(df_netflix_data))
     st.markdown("""
-        The above chart shows the level of lockdown that was active in each quarter. I now want to see if the different lockdowns 
-        had effects on the number of subscriptions.
+        The above chart shows the level of lockdown that was active in each quarter broken down by how strict the lockdown level was
+        on average on a worldwide basis . It will now be statistically investigated if the strength of these lockdown has an effect
+        on the number of new subscribers for Netflix.
         """)
     st.image("Covid 19 Lockdown FYP.png")
     st.markdown("""
-        I used another ANOVA test to compare the means of the 3 groups and then used Tukeys HSD (Honest Significant Difference)
-        to quantify the differences and see if they were statistically significant.
+        Another ANOVA test was used to compare the means of the 3 groups and then Tukeys HSD (Honest Significant Difference) was used
+        to quantify the differences between groups and see if they were statistically significant.
 
         As you can see from the p values Strong lockdown is signifcantly different from the other 2. This makes sense as a strong
         lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
         the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
-        lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
+        lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside and
+        were more inclined to do activites outdoors.
         """)
     st.write("")
     st.write("")
@@ -513,14 +516,15 @@ def Covid_19_Analysis(df_netflix_data):
 def Price_Hikes_Analysis(df_netflix_data):
     st.write("### Price Hikes")
     st.markdown("""
-        Before I started this analysis one trend I wanted to analyse was the effect Netflix's price increase had on its number
-        of subscribers as these increases are very controversial on social media when they're done. The graph below shows the 
-        quarters where Netflix increased the prices on at least 1 plan. 
+        One trend that motivated this project was to analyse the effect Netflix's price increases had on its number
+        of subscribers as these increases are very controversial on social media when they're done and speculation was that these 
+        would lead to less people using the service. The graph below shows the quarters where Netflix increased
+        the prices on at least 1 plan. 
         """)
     plot_netflix_sub_growth_v_price_hikes(df_netflix_data)
     st.markdown("""
-        I wanted to see if these price hikes had a statistically significant effect on the number of subscribers gained in that
-        quarter.
+        Statistical tests will be performed to see if these price hikes had a statistically significant effect on the 
+        number of subscribers gained in that quarter.
         """)
     st.image("Netflix Price Hikes Screenshot.png")
     st.markdown("""
@@ -528,6 +532,8 @@ def Price_Hikes_Analysis(df_netflix_data):
         these quarters with a price hike did not signicantly affect Netflix's subscription numbers. This goes against the common
         sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
         otherwise.
+
+        This points to how Netflix is becoming 
         """)
     st.write("")
     st.write("")
@@ -573,7 +579,6 @@ def main():
         df_sub = fetch_data_from_github(github_url)
         if df_sub is not None:
             st.plotly_chart(create_subscription_growth_chart(df_sub))
-
             # Fetch data from GitHub for Netflix subscription breakdown
             df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
             if df_netflix_data is not None:
@@ -602,7 +607,8 @@ def main():
 
             # Allow user to select which analyses to perform
             selected_analyses = st.multiselect("Select analyses to perform:", ["Q4 Analysis", "COVID-19 Analysis", "Price Hikes Analysis", "Password Sharing Crackdown Analysis"])
-
+            st.write("")
+            st.write("")
             # Call selected analyses based on user's selection
             if "Q4 Analysis" in selected_analyses:
                 Q4_analysis(df_netflix_data)
