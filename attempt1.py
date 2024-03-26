@@ -566,14 +566,24 @@ def main():
             st.warning("Please provide the GitHub URL for subscription change over quarters data.")
 
     elif selected_tab == "Placeholder":
-        # Fetch data from GitHub for Netflix subscription breakdown
-        df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
-        if df_netflix_data is not None:
-            st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+    # Fetch data from GitHub for Netflix subscription breakdown
+    df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
+    if df_netflix_data is not None:
+        st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+
+        # Allow user to select which analyses to perform
+        selected_analyses = st.multiselect("Select analyses to perform:", ["Q4 Analysis", "COVID-19 Analysis", "Price Hikes Analysis", "Password Sharing Crackdown Analysis"])
+
+        # Call selected analyses based on user's selection
+        if "Q4 Analysis" in selected_analyses:
             Q4_analysis(df_netflix_data)
+        if "COVID-19 Analysis" in selected_analyses:
             Covid_19_Analysis(df_netflix_data)
+        if "Price Hikes Analysis" in selected_analyses:
             Price_Hikes_Analysis(df_netflix_data)
+        if "Password Sharing Crackdown Analysis" in selected_analyses:
             Password_Sharing_Crackdown_Analysis(df_netflix_data)
+
             
             
 
