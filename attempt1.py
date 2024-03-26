@@ -465,6 +465,7 @@ def Q4_analysis(df_netflix_data):
         The fact that Q4 leads to higher subscription rates follows conventional wisdom that people watch more tv and movies during these
         months due to the worse weather and more time off from work for holidays.
         """)
+    st.write("")
 
 def Covid_19_Analysis(df_netflix_data):
     st.write("### Effect of Covid 19 Lockdown")
@@ -486,9 +487,8 @@ def Covid_19_Analysis(df_netflix_data):
         lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
         the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
         lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
-
-        
         """)
+    st.write("")
 
 def Price_Hikes_Analysis(df_netflix_data):
     st.write("### Price Hikes")
@@ -509,6 +509,7 @@ def Price_Hikes_Analysis(df_netflix_data):
         sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
         otherwise.
         """)
+    st.write("")
 
 def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("### Effect of Password Sharing Crackdown")
@@ -532,7 +533,7 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
         This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
         own account instead of sharing it with someone has offset the bad publicity from the decision.
         """)
-
+    st.write("")
 
 def main():
     # Add CSS to set the theme to light mode
