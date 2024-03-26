@@ -533,7 +533,9 @@ def Price_Hikes_Analysis(df_netflix_data):
         sentiment when these price hikes are introduced that people say they won't use Netflix but the subscription numbers show
         otherwise.
 
-        This points to how Netflix is becoming 
+        This points to how Netflix is becoming more of a necessity in households and therefore demand for it is becoming more 
+        inelastic as even though the prices increase people will continue to buy the service as they could not imagine not having
+        access to their favourite TV shows and movies.
         """)
     st.write("")
     st.write("")
