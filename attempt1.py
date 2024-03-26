@@ -489,6 +489,7 @@ def Covid_19_Analysis(df_netflix_data):
         lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
         """)
     st.write("")
+    st.write("")
 
 def Price_Hikes_Analysis(df_netflix_data):
     st.write("### Price Hikes")
