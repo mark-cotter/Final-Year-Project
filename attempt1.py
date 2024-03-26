@@ -543,21 +543,23 @@ def Price_Hikes_Analysis(df_netflix_data):
 def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("### Effect of Password Sharing Crackdown")
     st.markdown("""
-        One motivation for this project was to see how Netflix performed after introducing its very controversial crackdown on
-        peoples ability to share passwords. I wanted to see how its subscription numbers performed after making this change since
-        the public consensus was that people would refuse to buy new accounts when they lost access to the old one.
+        Netflix's controversial decison to crack down on people sharing passwords was a big inspiration for this project. There was
+        big interest in how Netflix's subscription numbers performed as the public consensus was that people would refuse to buy
+        new accounts when they lost access to the old one. We will see what the trend is after introducing these changes and is this
+        trend statistically significant
         """)
     plot_password_sharing_crackdown_effect(df_netflix_data)
     st.markdown("""
-        As you can see from the above graph this change seems to have the opposite effect from what was expected.
-        The trend after introducing the crackdown is positive and I will now test to see if this trend is singnificantly
-        different from before introducing the crackdown.
+        As you can see from the above graph this change seems to have the opposite effect from what was expected. The trend after 
+        introducing the crackdown is positive indicating that the public bought more Netflix subscription after the crackdown was
+        introduces
         """)
     st.image("Password Sharing Test.png")
     st.markdown("""
-        I performed a chow test which tests if the values after a certain break point are significantly different compared to
-        before it. As you can see although it is close the above p value is below the 5% level of significance causing us to
-        reject the null hypothesis that there is no difference before and after introducing the crackdown.
+        A chow test was performed which tests if the values after a certain break point (in this case when the crack down began) 
+        are significantly different compared tobefore it. As you can see although it is close the above p value is below the 5% 
+        level of significance causing the null hypothesis that there is no difference between the subscription figures before
+        and after the password sharing crackdown was introduced.
 
         This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
         own account instead of sharing it with someone has offset the bad publicity from the decision.
