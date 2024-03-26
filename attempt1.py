@@ -466,7 +466,8 @@ def Q4_analysis(df_netflix_data):
         months due to the worse weather and more time off from work for holidays.
         """)
     st.write("")
-
+    st.write("")
+    
 def Covid_19_Analysis(df_netflix_data):
     st.write("### Effect of Covid 19 Lockdown")
     st.markdown("""
@@ -511,6 +512,7 @@ def Price_Hikes_Analysis(df_netflix_data):
         otherwise.
         """)
     st.write("")
+    st.write("")
 
 def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("### Effect of Password Sharing Crackdown")
@@ -534,6 +536,7 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
         This shows that although the public sentiment was against the decision the benefit of getting some people to buy their
         own account instead of sharing it with someone has offset the bad publicity from the decision.
         """)
+    st.write("")
     st.write("")
 
 def main():
