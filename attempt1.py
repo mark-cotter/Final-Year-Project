@@ -446,6 +446,24 @@ def plot_password_sharing_crackdown_effect(df_netflix_data):
     # Display the plot in Streamlit
     st.plotly_chart(fig)
 
+
+def plot_netflix_subscription_growth(df_netflix_data):
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], 
+                             y=df_netflix_data['Sub Increase Q2Q M'], 
+                             mode='lines+markers', 
+                             name='Netflix',
+                             line=dict(color='red')))
+    
+    fig.update_layout(title_text='Netflix Quarterly Subscription Growth',
+                      xaxis_title='Quarter',
+                      yaxis_title='Sub Increase in millions',
+                      height=370,
+                      showlegend=True)
+    
+    st.plotly_chart(fig)
+
 def Q4_analysis(df_netflix_data):
     st.write("### Q4")
     st.markdown("""
@@ -576,7 +594,7 @@ def main():
         # Fetch data from GitHub for Netflix subscription breakdown
         df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
         if df_netflix_data is not None:
-            st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
+            plot_netflix_subscription_growth(df_netflix_data)
 
             # Allow user to select which analyses to perform
             selected_analyses = st.multiselect("Select analyses to perform:", ["Q4 Analysis", "COVID-19 Analysis", "Price Hikes Analysis", "Password Sharing Crackdown Analysis"])
