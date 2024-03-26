@@ -485,7 +485,9 @@ def Covid_19_Analysis(df_netflix_data):
         As you can see from the p values Strong lockdown is signifcantly different from the other 2. This makes sense as a strong
         lockdown would force people inside where streaming is one of the only activities one can do. It is also interesting that
         the largest difference is between Strong and Weak lockdown instead of Strong and no Lockdown. This could be because weak
-        lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.\n
+        lockdowns occurred directly after Strong lockdowns meaning people had had their fill of streaming from being stuck inside.
+
+        
         """)
 
 def Price_Hikes_Analysis(df_netflix_data):
