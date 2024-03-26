@@ -595,6 +595,10 @@ def main():
         df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
         if df_netflix_data is not None:
             plot_netflix_subscription_growth(df_netflix_data)
+            st.markdown("""
+            The above graph shows Netflix's subscription growth over time. Several analysis were performed about observations that
+            could be gleaned from this graph. In the selection bar below select that topics that you would like to learn more about
+            """)
 
             # Allow user to select which analyses to perform
             selected_analyses = st.multiselect("Select analyses to perform:", ["Q4 Analysis", "COVID-19 Analysis", "Price Hikes Analysis", "Password Sharing Crackdown Analysis"])
