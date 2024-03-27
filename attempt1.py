@@ -581,7 +581,7 @@ def Q2Q_heatmap(df_data):
     st.pyplot(fig)
 
 def full_data_heatmap(df_data):
-    columns_of_interest = ["Disney+ Subscribers","Netflix Subscribers","Peacock Subscribers"]
+    columns_of_interest = ["Disney+ Subscribers","Netflix Subscribers","Peacock Subscribers","Hulu Subscribers"]
     subset = df_data[columns_of_interest]
     correlation_matrix = subset.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
