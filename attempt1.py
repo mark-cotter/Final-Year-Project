@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import requests
 import io
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def fetch_data_from_github(file_path):
     try:
