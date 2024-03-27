@@ -580,6 +580,18 @@ def generate_correlation_heatmap(df_data):
     
     st.pyplot(fig)
 
+def generate_correlation_heatmap(df_data):
+    correlation_matrix = df_data.corr()
+    fig, ax = plt.subplots(figsize=(6, 5))
+    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
+    plt.gca().get_children()[4 * len(correlation_matrix.columns) + 2].set_color('red')
+    plt.gca().get_children()[6 * len(correlation_matrix.columns) + 2].set_color('red')
+    plt.gca().get_children()[1 * len(correlation_matrix.columns) + 5].set_color('red')
+    plt.gca().get_children()[1 * len(correlation_matrix.columns) + 7].set_color('red')
+    plt.title('Correlation Matrix Heatmap')
+    
+    st.pyplot(fig)
+
 def main():
     # Add CSS to set the theme to light mode
 
@@ -648,6 +660,7 @@ def main():
             correlated. We will expand to other variables such as total subscribers compared to quarterly subscriber increase to see
             if there is any correlation.
             """)
+            generate_correlation_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
             
 
 
