@@ -581,8 +581,7 @@ def Q2Q_heatmap(df_data):
     st.pyplot(fig)
 
 def full_data_heatmap(df_data):
-    numeric_df = df_data.select_dtypes(include=['float64', 'int64'])
-    correlation_matrix = numeric_df.corr()
+    correlation_matrix = df_data.corr()
     plt.figure(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
