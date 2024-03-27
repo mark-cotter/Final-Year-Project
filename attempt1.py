@@ -581,7 +581,6 @@ def Q2Q_heatmap(df_data):
     st.pyplot(fig)
 
 def full_data_heatmap(df_corr):
-    df_corr.drop(columns=["Quarter"])
     correlation_matrix = df_corr.corr()
     plt.figure(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
@@ -591,7 +590,6 @@ def full_data_heatmap(df_corr):
 
 
 def main():
-    # Add CSS to set the theme to light mode
 
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
