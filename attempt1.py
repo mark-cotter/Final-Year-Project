@@ -5,6 +5,7 @@ import requests
 import io
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 def fetch_data_from_github(file_path):
     try:
