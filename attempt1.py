@@ -587,9 +587,9 @@ def full_data_heatmap(df_data):
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
 
     plt.gca().get_children()[4 * len(correlation_matrix.columns) + 2].set_color('red')
-    plt.gca().get_children()[6 * len(correlation_matrix.columns) + 2].set_color('red')
+    plt.gca().get_children()[5 * len(correlation_matrix.columns) + 2].set_color('red')
     plt.gca().get_children()[1 * len(correlation_matrix.columns) + 5].set_color('red')
-    plt.gca().get_children()[1 * len(correlation_matrix.columns) + 7].set_color('red')
+    plt.gca().get_children()[1 * len(correlation_matrix.columns) + 6].set_color('red')
 
     plt.title('Correlation Matrix Heatmap')
 
