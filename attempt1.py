@@ -574,10 +574,11 @@ def generate_correlation_heatmap(df_data):
     columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
     subset = df_data[columns_of_interest]
     correlation_matrix = subset.corr()
+    fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
     
-    st.pyplot()
+    st.pyplot(fig)
 
 def main():
     # Add CSS to set the theme to light mode
