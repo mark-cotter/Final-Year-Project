@@ -581,7 +581,7 @@ def Q2Q_heatmap(df_data):
     st.pyplot(fig)
 
 def full_data_heatmap(df_data):
-    columns_to_keep = df.columns[df.columns != 'Quarter']
+    columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
     columns_of_interest = ["Disney+ Subscribers","Netflix Subscribers","Peacock Subscribers","Hulu Subscribers","Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
     subset = df_data[columns_to_keep]
     correlation_matrix = subset.corr()
