@@ -570,7 +570,7 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("")
 
 
-def generate_correlation_heatmap(df_data):
+def Q2Q_heatmap(df_data):
     columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
     subset = df_data[columns_of_interest]
     correlation_matrix = subset.corr()
@@ -580,17 +580,20 @@ def generate_correlation_heatmap(df_data):
     
     st.pyplot(fig)
 
-def generate_correlation_heatmap(df_data):
+def full_data_heatmap(df_data):
     correlation_matrix = df_data.corr()
-    fig, ax = plt.subplots(figsize=(6, 5))
+    plt.figure(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
+
     plt.gca().get_children()[4 * len(correlation_matrix.columns) + 2].set_color('red')
     plt.gca().get_children()[6 * len(correlation_matrix.columns) + 2].set_color('red')
     plt.gca().get_children()[1 * len(correlation_matrix.columns) + 5].set_color('red')
     plt.gca().get_children()[1 * len(correlation_matrix.columns) + 7].set_color('red')
+
     plt.title('Correlation Matrix Heatmap')
-    
-    st.pyplot(fig)
+
+    st.pyplot()
+
 
 def main():
     # Add CSS to set the theme to light mode
@@ -653,14 +656,16 @@ def main():
             Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
             to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
             """)
-            generate_correlation_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
+            Q2Q_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
             st.markdown("""
             Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
             affected as all correlation coefficients for Netflix in the heat map above are close to 0 showing they're not strongly
             correlated. We will expand to other variables such as total subscribers compared to quarterly subscriber increase to see
             if there is any correlation.
             """)
-            generate_correlation_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
+            full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
+            
+            
             
 
 
