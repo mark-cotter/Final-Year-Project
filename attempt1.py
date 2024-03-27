@@ -586,20 +586,9 @@ def full_data_heatmap(df_data):
     columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
     subset = df_data[columns_to_keep]
     correlation_matrix = subset.corr()
-    
-    # Create a mask to highlight the 4th row and 5th column
-    mask = np.zeros_like(correlation_matrix, dtype=bool)
-    mask[3, 4] = True  # 4th row, 5th column
-    
     fig, ax = plt.subplots(figsize=(8, 6))
-    
-    # Plot the main heatmap
-    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f", ax=ax)
-    
-    # Overlay the highlighted cells
-    sns.heatmap(correlation_matrix, mask=mask, cmap='Reds', cbar=False, annot=True, fmt=".2f", ax=ax)
-    
-    plt.title('Correlation Matrix Heatmap with Highlighted Cell')
+    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
+    plt.title('Correlation Matrix Heatmap')
     st.pyplot(fig)
 
     
