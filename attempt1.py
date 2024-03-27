@@ -567,6 +567,17 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("")
     st.write("")
 
+
+def generate_correlation_heatmap(df_data):
+    columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
+    subset = df_data[columns_of_interest]
+    correlation_matrix = subset.corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
+    plt.title('Correlation Matrix Heatmap')
+    
+    st.pyplot()
+
 def main():
     # Add CSS to set the theme to light mode
 
@@ -628,6 +639,7 @@ def main():
             Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
             to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
             """)
+            generate_correlation_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
             
 
 
