@@ -682,7 +682,7 @@ def main():
             st.write("Netflix-Disney+ Test Statistic", cc_ND)
             st.write("p-value:", round(p_ND, 6))
             st.write("Netflix-Hulu Test Statistic:", cc_NH)
-            st.write("p-value:", round(p_NH, 14))
+            st.write("p-value:", round(p_NH, 13))
             st.write("Hulu-Disney+ Test Statistic:", cc_HD)
             st.write("p-value:", round(p_HD, 6))
 
