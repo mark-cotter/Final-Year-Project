@@ -686,7 +686,7 @@ def main():
             
 
     elif selected_tab == "Competition Breakdown":
-        st.write("### Competition Analysis")
+            st.write("### Competition Analysis")
             st.markdown("""
             Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
             to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
