@@ -589,9 +589,7 @@ def full_data_heatmap(df_data):
     st.pyplot(fig)
 
 def final_heatmap(df_data):
-    columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
-    subset = df_data[columns_of_interest]
-    correlation_matrix = subset.corr()
+    correlation_matrix = df_data.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
@@ -778,7 +776,9 @@ def main():
             However another observation from the original heatmap is the reasonably strong negative correlation between Netflix
             Subscribers and Disney and Hulu sub change Q2Q of -0.74 and -0.75 respectively.
             """)
-            final_heatmap(df_data)
+            columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
+            subset = df_data[columns_of_interest]
+            final_heatmap(subset)
             st.write("")
             st.markdown("""
             These negative correlations suggest that although the total subscriber numbers of these services are positively associated
