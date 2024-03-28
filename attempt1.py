@@ -648,43 +648,7 @@ def main():
             if "Password Sharing Crackdown Analysis" in selected_analyses:
                 Password_Sharing_Crackdown_Analysis(df_netflix_data)
 
-            st.write("### Competition Analysis")
-            st.markdown("""
-            Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
-            to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
-            """)
-            Q2Q_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
-            st.markdown("""
-            Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
-            affected as all correlation coefficients for Netflix in the heat map above are close to 0 showing they're not strongly
-            correlated. We will expand to other variables such as total subscribers compared to quarterly subscriber increase to see
-            if there is any correlation.
-            """)
-            full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
-            st.markdown("""
-            The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
-            in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
-            positively correlated for each service as each coefficient is above 0.8.
-
-            This indicates that an increase in one services subscribers tends to occur alongside an increase in subscribers for the other
-            services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
-            less people use the other service. The Spearman Rank statistical test will now be performed to determine if it can be 
-            confidently said that this correlation is significant and not random. Unfortunately this test can't be performed for 
-            Peacock as it only has data from 21Q3 so due to more limited sample size the results would be unreliable.
-            """)
-            df_data=pd.read_csv("Sub_Change_Summary.csv")
-            cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
-            cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data['Hulu Subscribers'])
-            cc_HD, p_HD = spearmanr(df_data['Netflix Subscribers'], df_data['Peacock Subscribers'])
-            st.write("**Total Subscribers Correlation Testing**")
-            st.write("Netflix-Disney+ Test Statistic", cc_ND)
-            st.write("p-value:", p_ND)
-            st.write("Netflix-Hulu Test Statistic", cc_NH)
-            st.write("p-value:", p_NH)
-            st.write("Hulu-Disney+ Test Statistic", cc_HD)
-            st.write("p-value:", p_HD)
-            
-
+           
     elif selected_tab == "Competition Breakdown":
             st.write("### Competition Analysis")
             st.markdown("""
