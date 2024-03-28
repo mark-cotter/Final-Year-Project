@@ -719,7 +719,7 @@ def main():
             st.write("Netflix-Disney+ Q2Q Change Test Statistic", cc_ND)
             st.write("p-value:", round(p_ND, 6))
             st.write("Netflix-Hulu Q2Q Change Test Statistic:", cc_NH)
-            st.write("p-value:", round(p_NH, 4))
+            st.write("p-value:", round(p_NH, 5))
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
