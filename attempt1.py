@@ -710,7 +710,7 @@ def main():
             st.markdown("""
             These negative correlations suggest that although the total subscriber numbers of these services are positively associated
             if Netflix's competition is rapidly growing that can have a negative association with Netflix's total subscribers. The 
-            Spearman tests will show if there is a significant non random association between these variables
+            Spearman tests will show if there is a significant non random association between these variables.
             """)
             st.write("")
             cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney Sub Change Q2Q'])
@@ -720,6 +720,20 @@ def main():
             st.write("p-value:", round(p_ND, 6))
             st.write("Netflix-Hulu Q2Q Change Test Statistic:", cc_NH)
             st.write("p-value:", round(p_NH, 5))
+            st.write("")
+            st.markdown("""
+            As both p values are below the 5% significance level we can conclude that there is a significant non random association 
+            between Netflix Susbcribers and the other 2 variables.
+
+            This is interesting as you'd assume Netflix subscribers between positively correlated to other services total subscriber 
+            numbers and negatively association with the quarterly increase of other services subscribers would be a contradiction. 
+            However on further examination, it can be understood that total subscriber numbers have low variance and are generally slowly
+            increasing or very slightly decreasing while Q2Q subscriber increase numbers have far higher variance as shown in the graphs
+            below.
+            
+            It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
+            which could be the cause of the trends
+            """)
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
