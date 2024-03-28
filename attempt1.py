@@ -781,8 +781,8 @@ def main():
             st.write("")
             st.markdown("""
             These negative correlations suggest that although the total subscriber numbers of these services are positively associated
-            if Netflix's competition is rapidly growing that can have a negative association with Netflix's total subscribers. The 
-            Spearman tests will show if there is a significant non random association between these variables.
+            if Netflix is rapidly growing that can have a negative association with Netflix's competitors new quarterly subscribers figures. 
+            The Spearman tests will show if there is a significant non random association between these variables.
             """)
             st.write("")
             cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney Sub Change Q2Q'])
