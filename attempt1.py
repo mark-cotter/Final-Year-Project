@@ -592,6 +592,16 @@ def full_data_heatmap(df_data):
     plt.title('Correlation Matrix Heatmap')
     st.pyplot(fig)
 
+def final_heatmap(df_data):
+    columns_of_interest = ["Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
+    subset = df_data[columns_of_interest]
+    correlation_matrix = subset.corr()
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
+    plt.title('Correlation Matrix Heatmap')
+    
+    st.pyplot(fig)
+
     
 def main():
 
@@ -685,6 +695,17 @@ def main():
             st.write("p-value:", round(p_NH, 13))
             st.write("Hulu-Disney+ Test Statistic:", cc_HD)
             st.write("p-value:", round(p_HD, 6))
+            st.write("")
+            st.markdown("""
+            The above Spearman Rank tests all gave p values less than a 5% significance level. This means that there is enough evidence
+            to conclude that there is a significant non random association between the 2 variables. Although of course correlation does
+            not equal causation it can be concluded that these variables tend to positively trend in the same direction in terms of
+            total subscriber numbers.
+
+            However another observation from the original heatmap is the reasonably strong negative correlation between Netflix
+            Subscribers and Disney and Hulu sub change Q2Q of -0.74 and -0.75 respectively.
+            """)
+            final_heatmap(df_data)
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
