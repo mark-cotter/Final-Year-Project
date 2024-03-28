@@ -737,7 +737,10 @@ def main():
             Competition in the streaming marketplace has been rising in recent years with service like Disney+, Hulu and Peacock now 
             trying to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
             """)
-            Q2Q_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
+            df_data=pd.read_csv("Sub_Change_Summary.csv")
+            columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
+            subset = df_data[columns_of_interest]
+            Q2Q_heatmap(subset)
             st.markdown("""
             Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
             affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
