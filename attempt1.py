@@ -602,6 +602,78 @@ def final_heatmap(df_data):
     
     st.pyplot(fig)
 
+
+def plot_streaming_services_Q2Q_growth(df_data):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Netflix Sub Change Q2Q'], 
+                             mode='lines+markers', 
+                             name='Netflix',
+                             line=dict(color='red')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Disney Sub Change Q2Q'], 
+                             mode='lines+markers', 
+                             name='Disney+',
+                             line=dict(color='blue')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Hulu Sub Change Q2Q'], 
+                             mode='lines+markers', 
+                             name='Hulu',
+                             line=dict(color='green')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Peacock Sub Change Q2Q'], 
+                             mode='lines+markers', 
+                             name='Peacock',
+                             line=dict(color='black')))
+
+    fig.update_layout(title_text='Quarterly Subscription Growth of Streaming Services',
+                      xaxis_title='Quarter',
+                      yaxis_title='Sub Increase in millions',
+                      height=370,
+                      showlegend=True)
+ 
+    st.plotly_chart(fig)
+
+def plot_total_subscriber_growth(df_data):
+    fig = go.Figure()
+    
+
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Netflix Subscribers'], 
+                             mode='lines+markers', 
+                             name='Netflix',
+                             line=dict(color='red')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Disney+ Subscribers'], 
+                             mode='lines+markers', 
+                             name='Disney+',
+                             line=dict(color='blue')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Hulu Subscribers'], 
+                             mode='lines+markers', 
+                             name='Hulu',
+                             line=dict(color='green')))
+    
+    fig.add_trace(go.Scatter(x=df_data['Quarter'], 
+                             y=df_data['Peacock Subscribers'], 
+                             mode='lines+markers', 
+                             name='Peacock',
+                             line=dict(color='black')))
+    
+    fig.update_layout(title_text='Total Subscriber Growth for Streaming Services',
+                      xaxis_title='Quarter',
+                      yaxis_title='Subscribers in millions',
+                      height=370,
+                      showlegend=True)
+
+    st.plotly_chart(fig)
+
     
 def main():
 
@@ -734,6 +806,8 @@ def main():
             It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
             which could be the cause of the trends
             """)
+            plot_streaming_services_Q2Q_growth(df_data)
+            plot_total_subscriber_growth(df_data)
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
