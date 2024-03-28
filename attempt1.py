@@ -648,7 +648,7 @@ def main():
             if "Password Sharing Crackdown Analysis" in selected_analyses:
                 Password_Sharing_Crackdown_Analysis(df_netflix_data)
 
-            st.write("###Competition Analysis")
+            st.write("### Competition Analysis")
             st.markdown("""
             Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
             to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
