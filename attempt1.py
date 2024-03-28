@@ -648,7 +648,7 @@ def main():
             if "Password Sharing Crackdown Analysis" in selected_analyses:
                 Password_Sharing_Crackdown_Analysis(df_netflix_data)
 
-            st.write("### Competition Analysis")
+            st.write("###Competition Analysis")
             st.markdown("""
             Competition in the streaming marketplace has been rising in recent years with service like Disney+ and Peacock now trying
             to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
@@ -668,13 +668,17 @@ def main():
 
             This indicates that an increase in one services subscribers tends to occur alongside an increase in subscribers for the other
             services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
-            less people use the other service. 
+            less people use the other service. The Spearman Rank statistical test will now be performed to determine if it can be 
+            confidently said that this correlation is significant and not random. Unfortunately this test can't be performed for 
+            Peacock as it only has data from 21Q3 so due to more limited sample size the results would be unreliable.
             """)
             df_data=pd.read_csv("Sub_Change_Summary.csv")
-            correlation_coefficient, p_value = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
-            st.write("### Spearman's Rank Correlation")
-            st.write("Correlation Coefficient:", correlation_coefficient)
-            st.write("p-value:", p_value)
+            cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
+            cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data['Hulu Subscribers'])
+            cc_HD, p_HD = spearmanr(df_data['Netflix Subscribers'], df_data['Peacock Subscribers'])
+            st.write("**Total Subscribers Correlation Testing**")
+            st.write("Netflix-Disney+ Test Statistic", cc_ND)
+            st.write("p-value:", p_ND)
             
 
 
