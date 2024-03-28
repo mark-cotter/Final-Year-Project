@@ -795,19 +795,32 @@ def main():
             st.write("")
             st.markdown("""
             As both p values are below the 5% significance level we can conclude that there is a significant non random association 
-            between Netflix Susbcribers and the other 2 variables.
-
-            This is interesting as you'd assume Netflix subscribers being positively correlated to other services total subscriber 
+            between Netflix Susbcribers and the other 2 variables. This is interesting as you'd assume Netflix subscribers being positively correlated to other services total subscriber 
             numbers and negatively association with the quarterly increase of other services subscribers would be a contradiction. 
-            However on further examination, it can be understood that total subscriber numbers have low variance and are generally slowly
-            increasing or very slightly decreasing while Q2Q subscriber increase numbers have far higher variance as shown in the graphs
-            below.
             
-            It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
-            which could be the cause of the trends
             """)
             plot_streaming_services_Q2Q_growth(df_data)
             plot_total_subscriber_growth(df_data)
+            st.markdown("""
+            The above graph shows that since 2020 each services total subscribers has been increasing and even with the slight downturn
+            in new subscribers for Disney+ and Hulu the number of total subscribers has barely decreased compared to how many subscribers
+            they already had. Since the trends has been usually positive throughout the years it makes sense that there is strong 
+            positive correlation for total quarterly subscribers between each streaming service. This shows that since 2020 the 
+            size of streaming market has grown massively which has positively benefitted all services involved
+
+            The quarter to quarter subscription increase numbers are clearly more variable as shown in the graph above. The recent 
+            downturn in new subscribers in 2023 for Disney+ and Hulu obviously has a bigger effect on this metric and has caused it to 
+            drop significantly. This has coincided with an increase in new subscribers for Netflix in 2023. Netflix's increase compared
+            to Disney+ and Hulus decrease has understandably caused a negative correlation. This could possibly point to the market
+            becoming more saturated in 2023 and new customers now only want to purchase one new streaming service which is usually 
+            Netflix.
+
+            It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
+            which could be the cause of these trends. It will be interesting however to see if this trend continues and Disney+ and Hulu
+            continue to struggle to gain new subscribers while Netflix thrives
+            
+            """)
+
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
