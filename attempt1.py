@@ -573,9 +573,7 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
 
 
 def Q2Q_heatmap(df_data):
-    columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
-    subset = df_data[columns_of_interest]
-    correlation_matrix = subset.corr()
+    correlation_matrix = df_data.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
@@ -584,9 +582,7 @@ def Q2Q_heatmap(df_data):
 
 
 def full_data_heatmap(df_data):
-    columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
-    subset = df_data[columns_to_keep]
-    correlation_matrix = subset.corr()
+    correlation_matrix = df_data.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
@@ -747,7 +743,9 @@ def main():
             they're not strongly correlated. We will expand to other variables such as total subscribers compared to quarterly 
             subscriber increase to see if there is any correlation.
             """)
-            full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
+            columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
+            subset = df_data[columns_to_keep]
+            full_data_heatmap(subset)
             st.markdown("""
             The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
             in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
