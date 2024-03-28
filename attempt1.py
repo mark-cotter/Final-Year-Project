@@ -672,8 +672,9 @@ def main():
             """)
             df_data=pd.read_csv("Sub_Change_Summary.csv")
             correlation_coefficient, p_value = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
-            print("Spearman's Rank Correlation Coefficient:", correlation_coefficient)
-            print("p-value:", p_value)
+            st.write("### Spearman's Rank Correlation")
+            st.write("Correlation Coefficient:", correlation_coefficient)
+            st.write("p-value:", p_value)
             
 
 
