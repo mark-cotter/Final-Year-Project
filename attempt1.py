@@ -593,7 +593,7 @@ def full_data_heatmap(df_data):
     st.pyplot(fig)
 
 def final_heatmap(df_data):
-    columns_of_interest = ["Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
+    columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
     subset = df_data[columns_of_interest]
     correlation_matrix = subset.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
