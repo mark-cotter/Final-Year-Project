@@ -741,7 +741,7 @@ def main():
             st.markdown("""
             Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
             affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
-            they're not stronglycorrelated. We will expand to other variables such as total subscribers compared to quarterly 
+            they're not strongly correlated. We will expand to other variables such as total subscribers compared to quarterly 
             subscriber increase to see if there is any correlation.
             """)
             full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
