@@ -680,11 +680,11 @@ def main():
             cc_HD, p_HD = spearmanr(df_data['Hulu Subscribers'], df_data['Disney+ Subscribers'])
             st.write("**Total Subscribers Correlation Testing**")
             st.write("Netflix-Disney+ Test Statistic", cc_ND)
-            st.write("p-value:", round(p_ND, 3))
+            st.write("p-value:", round(p_ND, 6))
             st.write("Netflix-Hulu Test Statistic:", cc_NH)
-            st.write("p-value:", round(p_NH, 3))
+            st.write("p-value:", round(p_NH, 6))
             st.write("Hulu-Disney+ Test Statistic:", cc_HD)
-            st.write("p-value:", round(p_HD, 3))
+            st.write("p-value:", round(p_HD, 6))
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
