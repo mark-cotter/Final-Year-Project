@@ -677,7 +677,7 @@ def main():
             df_data=pd.read_csv("Sub_Change_Summary.csv")
             cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
             cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data['Hulu Subscribers'])
-            cc_HD, p_HD = spearmanr(df_data['Netflix Subscribers'], df_data['Peacock Subscribers'])
+            cc_HD, p_HD = spearmanr(df_data['Hulu Subscribers'], df_data['Disney+ Subscribers'])
             st.write("**Total Subscribers Correlation Testing**")
             st.write("Netflix-Disney+ Test Statistic", cc_ND)
             st.write("p-value:", p_ND)
