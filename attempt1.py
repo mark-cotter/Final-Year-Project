@@ -735,14 +735,14 @@ def main():
             st.write("### Competition Analysis")
             st.markdown("""
             Competition in the streaming marketplace has been rising in recent years with service like Disney+, Hulu and Peacock now 
-            tryingto compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
+            trying to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
             """)
             Q2Q_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
             st.markdown("""
             Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
-            affected as all correlation coefficients for Netflix in the heat map above are close to 0 showing they're not strongly
-            correlated. We will expand to other variables such as total subscribers compared to quarterly subscriber increase to see
-            if there is any correlation.
+            affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
+            they're not stronglycorrelated. We will expand to other variables such as total subscribers compared to quarterly 
+            subscriber increase to see if there is any correlation.
             """)
             full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
             st.markdown("""
