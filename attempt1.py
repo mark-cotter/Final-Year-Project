@@ -6,6 +6,7 @@ import io
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import spearmanr
 
 def fetch_data_from_github(file_path):
     try:
@@ -660,8 +661,15 @@ def main():
             if there is any correlation.
             """)
             full_data_heatmap(pd.read_csv("Sub_Change_Summary.csv"))
-            
-            
+            st.markdown("""
+            The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
+            in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
+            positively correlated for each service as each coefficient is above 0.8.
+
+            This indicates that an increase in one services subscribers tends to occur alongside an increase in subscribers for the other
+            services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
+            less people use the other service. 
+            """)
             
 
 
