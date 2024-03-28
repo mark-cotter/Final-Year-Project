@@ -571,31 +571,12 @@ def Password_Sharing_Crackdown_Analysis(df_netflix_data):
     st.write("")
     st.write("")
 
-
-def Q2Q_heatmap(df_data):
-    correlation_matrix = df_data.corr()
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
-    plt.title('Correlation Matrix Heatmap')
-    
-    st.pyplot(fig)
-
-
-def full_data_heatmap(df_data):
+def data_heatmap(df_data):
     correlation_matrix = df_data.corr()
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
     plt.title('Correlation Matrix Heatmap')
     st.pyplot(fig)
-
-def final_heatmap(df_data):
-    correlation_matrix = df_data.corr()
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f")
-    plt.title('Correlation Matrix Heatmap')
-    
-    st.pyplot(fig)
-
 
 def plot_streaming_services_Q2Q_growth(df_data):
     fig = go.Figure()
@@ -734,7 +715,7 @@ def main():
             df_data=pd.read_csv("Sub_Change_Summary.csv")
             columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
             subset = df_data[columns_of_interest]
-            Q2Q_heatmap(subset)
+            data_heatmap(subset)
             st.markdown("""
             Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
             affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
@@ -743,7 +724,7 @@ def main():
             """)
             columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
             subset = df_data[columns_to_keep]
-            full_data_heatmap(subset)
+            data_heatmap(subset)
             st.markdown("""
             The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
             in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
@@ -778,7 +759,7 @@ def main():
             """)
             columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
             subset = df_data[columns_of_interest]
-            final_heatmap(subset)
+            data_heatmap(subset)
             st.write("")
             st.markdown("""
             These negative correlations suggest that although the total subscriber numbers of these services are positively associated
