@@ -797,7 +797,7 @@ def main():
             As both p values are below the 5% significance level we can conclude that there is a significant non random association 
             between Netflix Susbcribers and the other 2 variables.
 
-            This is interesting as you'd assume Netflix subscribers between positively correlated to other services total subscriber 
+            This is interesting as you'd assume Netflix subscribers being positively correlated to other services total subscriber 
             numbers and negatively association with the quarterly increase of other services subscribers would be a contradiction. 
             However on further examination, it can be understood that total subscriber numbers have low variance and are generally slowly
             increasing or very slightly decreasing while Q2Q subscriber increase numbers have far higher variance as shown in the graphs
