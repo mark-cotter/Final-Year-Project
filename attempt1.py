@@ -670,9 +670,10 @@ def main():
             services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
             less people use the other service. 
             """)
+            df_data=pd.read_csv("Sub_Change_Summary.csv")
             correlation_coefficient, p_value = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
-        print("Spearman's Rank Correlation Coefficient:", correlation_coefficient)
-        print("p-value:", p_value)
+            print("Spearman's Rank Correlation Coefficient:", correlation_coefficient)
+            print("p-value:", p_value)
             
 
 
