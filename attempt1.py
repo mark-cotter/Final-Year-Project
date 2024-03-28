@@ -706,7 +706,20 @@ def main():
             Subscribers and Disney and Hulu sub change Q2Q of -0.74 and -0.75 respectively.
             """)
             final_heatmap(df_data)
-
+            st.write("")
+            st.markdown("""
+            These negative correlations suggest that although the total subscriber numbers of these services are positively associated
+            if Netflix's competition is rapidly growing that can have a negative association with Netflix's total subscribers. The 
+            Spearman tests will show if there is a significant non random association between these variables
+            """)
+            st.write("")
+            cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney Sub Change Q2Q'])
+            cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data["Hulu Sub Change Q2Q"])
+            st.write("**Netflix Subscribers Vs Competitors Q2Q Increases Correlation Testing**")
+            st.write("Netflix-Disney+ Q2Q Change Test Statistic", cc_ND)
+            st.write("p-value:", round(p_ND, 6))
+            st.write("Netflix-Hulu Q2Q Change Test Statistic:", cc_NH)
+            st.write("p-value:", round(p_NH, 13))
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
