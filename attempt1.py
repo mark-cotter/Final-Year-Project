@@ -649,6 +649,106 @@ def plot_total_subscriber_growth(df_data):
 
     st.plotly_chart(fig)
 
+
+import streamlit as st
+import pandas as pd
+from scipy.stats import spearmanr
+
+def analyze_competition():
+    st.write("### Competition Analysis")
+    st.markdown("""
+    Competition in the streaming marketplace has been rising in recent years with service like Disney+, Hulu and Peacock now 
+    trying to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
+    """)
+    df_data = pd.read_csv("Sub_Change_Summary.csv")
+    columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
+    subset = df_data[columns_of_interest]
+    data_heatmap(subset)
+    st.markdown("""
+    Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
+    affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
+    they're not strongly correlated. We will expand to other variables such as total subscribers compared to quarterly 
+    subscriber increase to see if there is any correlation.
+    """)
+    columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
+    subset = df_data[columns_to_keep]
+    data_heatmap(subset)
+    st.markdown("""
+    The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
+    in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
+    positively correlated for each service as each coefficient is above 0.8.
+
+    This indicates that an increase in one services subscribers tends to occur alongside an increase in subscribers for the other
+    services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
+    less people use the other service. The Spearman Rank statistical test will now be performed to determine if it can be 
+    confidently said that this correlation is significant and not random. Unfortunately this test can't be performed for 
+    Peacock as it only has data from 21Q3 so due to more limited sample size the results would be unreliable.
+    """)
+    cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
+    cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data['Hulu Subscribers'])
+    cc_HD, p_HD = spearmanr(df_data['Hulu Subscribers'], df_data['Disney+ Subscribers'])
+    st.write("**Total Subscribers Correlation Testing**")
+    st.write("Netflix-Disney+ Test Statistic", cc_ND)
+    st.write("p-value:", round(p_ND, 6))
+    st.write("Netflix-Hulu Test Statistic:", cc_NH)
+    st.write("p-value:", round(p_NH, 13))
+    st.write("Hulu-Disney+ Test Statistic:", cc_HD)
+    st.write("p-value:", round(p_HD, 6))
+    st.write("")
+    st.markdown("""
+    The above Spearman Rank tests all gave p values less than a 5% significance level. This means that there is enough evidence
+    to conclude that there is a significant non random association between the 2 variables. Although of course correlation does
+    not equal causation it can be concluded that these variables tend to positively trend in the same direction in terms of
+    total subscriber numbers.
+
+    However another observation from the original heatmap is the reasonably strong negative correlation between Netflix
+    Subscribers and Disney and Hulu sub change Q2Q of -0.74 and -0.75 respectively.
+    """)
+    columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
+    subset = df_data[columns_of_interest]
+    data_heatmap(subset)
+    st.write("")
+    st.markdown("""
+    These negative correlations suggest that although the total subscriber numbers of these services are positively associated
+    if Netflix is rapidly growing that can have a negative association with Netflix's competitors new quarterly subscribers figures. 
+    The Spearman tests will show if there is a significant non random association between these variables.
+    """)
+    st.write("")
+    cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney Sub Change Q2Q'])
+    cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data["Hulu Sub Change Q2Q"])
+    st.write("**Netflix Subscribers Vs Competitors Q2Q Increases Correlation Testing**")
+    st.write("Netflix-Disney+ Q2Q Change Test Statistic", cc_ND)
+    st.write("p-value:", round(p_ND, 6))
+    st.write("Netflix-Hulu Q2Q Change Test Statistic:", cc_NH)
+    st.write("p-value:", round(p_NH, 5))
+    st.write("")
+    st.markdown("""
+    As both p values are below the 5% significance level we can conclude that there is a significant non random association 
+    between Netflix Susbcribers and the other 2 variables. This is interesting as you'd assume Netflix subscribers being positively 
+    correlated to other services total subscriber numbers and negatively association with the quarterly increase of other 
+    services subscribers would be a contradiction. 
+    """)
+    plot_streaming_services_Q2Q_growth(df_data)
+    plot_total_subscriber_growth(df_data)
+    st.markdown("""
+    The above graph shows that since 2020 each services total subscribers has been increasing and even with the slight downturn
+    in new subscribers for Disney+ and Hulu the number of total subscribers has barely decreased compared to how many subscribers
+    they already had. Since the trends has been usually positive throughout the years it makes sense that there is strong 
+    positive correlation for total quarterly subscribers between each streaming service. This shows that since 2020 the 
+    size of streaming market has grown massively which has positively benefitted all services involved.
+
+    The quarter to quarter subscription increase numbers are clearly more variable as shown in the graph above. The recent 
+    downturn in new subscribers in 2023 for Disney+ and Hulu obviously has a bigger effect on this metric and has caused it to 
+    drop significantly. This has coincided with an increase in new subscribers for Netflix in 2023. Netflix's increase compared
+    to Disney+ and Hulus decrease has understandably caused a negative correlation. This could possibly point to the market
+    becoming more saturated in 2023 and new customers now only want to purchase one new streaming service which is usually 
+    Netflix showing that Netflix is coming out on top in the streamer wars.
+
+    It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
+    which could be the cause of these trends. It will be interesting however to see if this trend continues and Disney+ and Hulu
+    continue to struggle to gain new subscribers while Netflix thrives.
+    """)
+
     
 def main():
 
@@ -707,101 +807,7 @@ def main():
 
            
     elif selected_tab == "Competition Breakdown":
-            st.write("### Competition Analysis")
-            st.markdown("""
-            Competition in the streaming marketplace has been rising in recent years with service like Disney+, Hulu and Peacock now 
-            trying to compete with Netflix. We will investigate has this increased level of competition affected Netflix's subscriptions.
-            """)
-            df_data=pd.read_csv("Sub_Change_Summary.csv")
-            columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
-            subset = df_data[columns_of_interest]
-            data_heatmap(subset)
-            st.markdown("""
-            Our usual metric of quarter to quarter subscription increase does not give any promising results for how Netflix is 
-            affected as all correlation coefficients for Netflix in the above correlation heat map above are close to 0 showing 
-            they're not strongly correlated. We will expand to other variables such as total subscribers compared to quarterly 
-            subscriber increase to see if there is any correlation.
-            """)
-            columns_to_keep = df_data.columns[df_data.columns != 'Quarter']
-            subset = df_data[columns_to_keep]
-            data_heatmap(subset)
-            st.markdown("""
-            The expanded correlation heat map above shows relationships between total quarterly subscribers as well as quarterly increase
-            in subscribers for each service. The first interesting observation is that the total quarterly subscribers seems strongly
-            positively correlated for each service as each coefficient is above 0.8.
-
-            This indicates that an increase in one services subscribers tends to occur alongside an increase in subscribers for the other
-            services and vice versa for decreases. This goes against how competition usually works where more people buying one service means
-            less people use the other service. The Spearman Rank statistical test will now be performed to determine if it can be 
-            confidently said that this correlation is significant and not random. Unfortunately this test can't be performed for 
-            Peacock as it only has data from 21Q3 so due to more limited sample size the results would be unreliable.
-            """)
-            df_data=pd.read_csv("Sub_Change_Summary.csv")
-            cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney+ Subscribers'])
-            cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data['Hulu Subscribers'])
-            cc_HD, p_HD = spearmanr(df_data['Hulu Subscribers'], df_data['Disney+ Subscribers'])
-            st.write("**Total Subscribers Correlation Testing**")
-            st.write("Netflix-Disney+ Test Statistic", cc_ND)
-            st.write("p-value:", round(p_ND, 6))
-            st.write("Netflix-Hulu Test Statistic:", cc_NH)
-            st.write("p-value:", round(p_NH, 13))
-            st.write("Hulu-Disney+ Test Statistic:", cc_HD)
-            st.write("p-value:", round(p_HD, 6))
-            st.write("")
-            st.markdown("""
-            The above Spearman Rank tests all gave p values less than a 5% significance level. This means that there is enough evidence
-            to conclude that there is a significant non random association between the 2 variables. Although of course correlation does
-            not equal causation it can be concluded that these variables tend to positively trend in the same direction in terms of
-            total subscriber numbers.
-
-            However another observation from the original heatmap is the reasonably strong negative correlation between Netflix
-            Subscribers and Disney and Hulu sub change Q2Q of -0.74 and -0.75 respectively.
-            """)
-            columns_of_interest = ["Disney Sub Change Q2Q", "Hulu Sub Change Q2Q", "Netflix Subscribers"]
-            subset = df_data[columns_of_interest]
-            data_heatmap(subset)
-            st.write("")
-            st.markdown("""
-            These negative correlations suggest that although the total subscriber numbers of these services are positively associated
-            if Netflix is rapidly growing that can have a negative association with Netflix's competitors new quarterly subscribers figures. 
-            The Spearman tests will show if there is a significant non random association between these variables.
-            """)
-            st.write("")
-            cc_ND, p_ND = spearmanr(df_data['Netflix Subscribers'], df_data['Disney Sub Change Q2Q'])
-            cc_NH, p_NH = spearmanr(df_data['Netflix Subscribers'], df_data["Hulu Sub Change Q2Q"])
-            st.write("**Netflix Subscribers Vs Competitors Q2Q Increases Correlation Testing**")
-            st.write("Netflix-Disney+ Q2Q Change Test Statistic", cc_ND)
-            st.write("p-value:", round(p_ND, 6))
-            st.write("Netflix-Hulu Q2Q Change Test Statistic:", cc_NH)
-            st.write("p-value:", round(p_NH, 5))
-            st.write("")
-            st.markdown("""
-            As both p values are below the 5% significance level we can conclude that there is a significant non random association 
-            between Netflix Susbcribers and the other 2 variables. This is interesting as you'd assume Netflix subscribers being positively 
-            correlated to other services total subscriber numbers and negatively association with the quarterly increase of other 
-            services subscribers would be a contradiction. 
-            
-            """)
-            plot_streaming_services_Q2Q_growth(df_data)
-            plot_total_subscriber_growth(df_data)
-            st.markdown("""
-            The above graph shows that since 2020 each services total subscribers has been increasing and even with the slight downturn
-            in new subscribers for Disney+ and Hulu the number of total subscribers has barely decreased compared to how many subscribers
-            they already had. Since the trends has been usually positive throughout the years it makes sense that there is strong 
-            positive correlation for total quarterly subscribers between each streaming service. This shows that since 2020 the 
-            size of streaming market has grown massively which has positively benefitted all services involved.
-
-            The quarter to quarter subscription increase numbers are clearly more variable as shown in the graph above. The recent 
-            downturn in new subscribers in 2023 for Disney+ and Hulu obviously has a bigger effect on this metric and has caused it to 
-            drop significantly. This has coincided with an increase in new subscribers for Netflix in 2023. Netflix's increase compared
-            to Disney+ and Hulus decrease has understandably caused a negative correlation. This could possibly point to the market
-            becoming more saturated in 2023 and new customers now only want to purchase one new streaming service which is usually 
-            Netflix showing that Netflix is coming out on top in the streamer wars.
-
-            It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
-            which could be the cause of these trends. It will be interesting however to see if this trend continues and Disney+ and Hulu
-            continue to struggle to gain new subscribers while Netflix thrives.
-            """)
+            analyze_competition()
 
     elif selected_tab == "Genre Breakdown":
         # Load genre breakdown data
