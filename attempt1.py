@@ -679,6 +679,10 @@ def main():
             st.write("**Total Subscribers Correlation Testing**")
             st.write("Netflix-Disney+ Test Statistic", cc_ND)
             st.write("p-value:", p_ND)
+            st.write("Netflix-Hulu Test Statistic", cc_NH)
+            st.write("p-value:", p_NH)
+            st.write("Hulu-Disney+ Test Statistic", cc_HD)
+            st.write("p-value:", p_HD)
             
 
 
