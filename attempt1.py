@@ -800,8 +800,7 @@ def main():
 
             It also must be acknowledged that correlation does not equal causation and these relationships could have other unseen factors
             which could be the cause of these trends. It will be interesting however to see if this trend continues and Disney+ and Hulu
-            continue to struggle to gain new subscribers while Netflix thrives
-            
+            continue to struggle to gain new subscribers while Netflix thrives.
             """)
 
     elif selected_tab == "Genre Breakdown":
