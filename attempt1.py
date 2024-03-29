@@ -843,6 +843,9 @@ def main():
     elif selected_tab == "Demographic Breakdown":
         df_region = pd.read_csv("netflix_region_breakdown.csv")
         if df_region is not None:
+            st.markdown("""
+            In recent years Netflix has been trying broaden its market and increase its international audienc
+            """)
             st.plotly_chart(create_region_breakdown_chart(df_region))
         
 
