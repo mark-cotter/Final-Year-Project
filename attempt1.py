@@ -8,15 +8,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import spearmanr
 
-def fetch_data_from_github(file_path):
-    try:
-        # Fetch the raw content of the CSV file from GitHub
-        response = requests.get(file_path)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        return pd.read_csv(io.StringIO(response.text))
-    except Exception as e:
-        st.error(f"Error fetching data from GitHub: {e}")
-        return None
 
 def create_subscription_growth_chart(df_sub):
     fig_sub = go.Figure()
