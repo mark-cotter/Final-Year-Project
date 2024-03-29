@@ -862,8 +862,20 @@ def main():
             """)
             df_content=pd.read_csv("Netflix_Content_Spend.csv")
             create_content_spend_chart(df_content)
+            st.markdown("""
+            This investment has had notable results with Netflix's internation audience growing from comprising 53.52% in 2018 to
+            65.9% in 2023 with Netflix's APAC subscribers percentage more than doubling in that time from 7.62% to 17.4%. The below
+            pie charts shows how Netflix's regional subscription market has developed overtime.
+            """)
             st.plotly_chart(create_region_breakdown_chart(df_region))
-        
 
+            st.markdown("""
+            The growth in APAC subscribers can be attributed to many factors but especially Netflix's increased spending on genres 
+            like Kdramas with shows such as the record breaking Squid Game. This trend shows no sign of stopping as Netflix has pledged 
+            to spend 2.5 Billion dollars on more Kdramas.
+            """)
+
+            
+        
 if __name__ == "__main__":
     main()
