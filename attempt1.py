@@ -759,7 +759,7 @@ def main():
     if selected_tab == "Netflix Subscription Breakdown":
    
         # Fetch data from GitHub for subscription change over quarters
-        df_sub = pd.read_csv("sub_change_Q2Q.csv)
+        df_sub = pd.read_csv("sub_change_Q2Q.csv")
         if df_sub is not None:
             st.plotly_chart(create_subscription_growth_chart(df_sub))
             # Fetch data from GitHub for Netflix subscription breakdown
