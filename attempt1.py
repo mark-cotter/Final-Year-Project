@@ -740,6 +740,19 @@ def analyze_competition():
     continue to struggle to gain new subscribers while Netflix thrives.
     """)
 
+def create_content_spend_chart(df_content):
+    df_content = pd.read_csv("Netflix_Content_Spend.csv")
+    trace1 = go.Bar(x=df_content["Year"], y=df_content["North American"], name='North American')
+    trace2 = go.Bar(x=df_content["Year"], y=df_content["International"], name='International')
+
+    fig = go.Figure(data=[trace1, trace2])
+    fig.update_layout(barmode='stack', 
+                      title='Netflix Yearly Content Spend', 
+                      xaxis_title='Year', 
+                      yaxis_title='Netflix Content spend $B')
+
+    return fig
+
     
 def main():
     st.sidebar.title("Navigation")
@@ -845,8 +858,10 @@ def main():
         if df_region is not None:
             st.markdown("""
             In recent years Netflix has been trying broaden its market and increase the size of its international audience. Different
-            methods have been utilised the main one being Netflix increasing its content spending for international shows
+            methods have been utilised the main one being Netflix increasing its content spending for international shows.
             """)
+            df_content=pd.read_csv("Netflix_Content_Spend.csv")
+            create_content_spend_chart(df_content)
             st.plotly_chart(create_region_breakdown_chart(df_region))
         
 
