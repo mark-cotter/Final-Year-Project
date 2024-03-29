@@ -757,15 +757,13 @@ def main():
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
-        # Placeholder for GitHub URL for subscription change over quarters data
-        github_url = "https://github.com/mark-cotter/Graph_work/raw/d679935c202d14da6b62ef8eb2e9f0483f111f49/sub_change_Q2Q.csv"
-        
+   
         # Fetch data from GitHub for subscription change over quarters
-        df_sub = fetch_data_from_github(github_url)
+        df_sub = pd.read_csv("sub_change_Q2Q.csv)
         if df_sub is not None:
             st.plotly_chart(create_subscription_growth_chart(df_sub))
             # Fetch data from GitHub for Netflix subscription breakdown
-            df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
+            df_netflix_data = pd.read_csv("just_netflix_data.csv")
             if df_netflix_data is not None:
                 st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
                 st.write("## Analysis")
