@@ -751,7 +751,6 @@ def analyze_competition():
 
     
 def main():
-
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
     tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
@@ -853,6 +852,7 @@ def main():
 
 
     elif selected_tab == "Demographic Breakdown":
+        st.write("")
         
 
 if __name__ == "__main__":
