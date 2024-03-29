@@ -754,7 +754,7 @@ def main():
 
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
@@ -821,7 +821,7 @@ def main():
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
-        df_region = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/d2608fd649be8cd2367a4a5a8c694651766c14e3/netflix_region_breakdown.csv")
+        df_region = pd.read_csv("netflix_region_breakdown.csv")
         if df_region is not None:
             st.plotly_chart(create_region_breakdown_chart(df_region))
 
@@ -850,6 +850,10 @@ def main():
         # Add bar chart for subscription revenue
         fig_subscription_revenue = create_subscription_revenue_bar_chart(df_users)
         st.plotly_chart(fig_subscription_revenue)
+
+
+    elif selected_tab == "Demographic Breakdown":
+        
 
 if __name__ == "__main__":
     main()
