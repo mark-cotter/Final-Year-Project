@@ -860,7 +860,7 @@ def main():
             In recent years Netflix has been trying broaden its market and increase the size of its international audience. Different
             methods have been utilised the main one being Netflix increasing its content spending for international shows. The bar 
             chart below shows how International speding ahs grown with it even surpassing North American content spending for the 
-            first time in 2024
+            first time in 2024.
             """)
             df_content=pd.read_csv("Netflix_Content_Spend.csv")
             create_content_spend_chart(df_content)
