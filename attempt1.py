@@ -841,7 +841,9 @@ def main():
 
 
     elif selected_tab == "Demographic Breakdown":
-        st.write("")
+        df_region = pd.read_csv("netflix_region_breakdown.csv")
+        if df_region is not None:
+            st.plotly_chart(create_region_breakdown_chart(df_region))
         
 
 if __name__ == "__main__":
