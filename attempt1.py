@@ -780,7 +780,7 @@ def main():
 
     elif selected_tab == "Placeholder":
         # Fetch data from GitHub for Netflix subscription breakdown
-        df_netflix_data = fetch_data_from_github("https://github.com/mark-cotter/Graph_work/raw/69fd5b807a41c08b4e0a2559f8186a1050d17037/just_netflix_data.csv")
+        df_netflix_data = pd.read_csv("just_netflix_data.csv")
         if df_netflix_data is not None:
             plot_netflix_subscription_growth(df_netflix_data)
             st.markdown("""
