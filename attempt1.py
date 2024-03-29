@@ -751,7 +751,7 @@ def create_content_spend_chart(df_content):
                       xaxis_title='Year', 
                       yaxis_title='Netflix Content spend $B')
 
-    return fig
+    st.plotly_chart(fig)
 
     
 def main():
