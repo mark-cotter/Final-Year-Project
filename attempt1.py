@@ -844,7 +844,8 @@ def main():
         df_region = pd.read_csv("netflix_region_breakdown.csv")
         if df_region is not None:
             st.markdown("""
-            In recent years Netflix has been trying broaden its market and increase its international audienc
+            In recent years Netflix has been trying broaden its market and increase the size of its international audience. Different
+            methods have been utilised the main one being Netflix increasing its content spending for international shows
             """)
             st.plotly_chart(create_region_breakdown_chart(df_region))
         
