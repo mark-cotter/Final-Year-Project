@@ -708,7 +708,7 @@ def create_total_hours_viewed_chart():
     ))
 
     fig.update_layout(
-        title='Total Hours Viewed on Netflix',
+        title='Total Hours Viewed on Netflix in 2023',
         yaxis=dict(title='Hours'),
         barmode='stack'
     )
@@ -774,6 +774,15 @@ def main():
 
     elif selected_tab == "Content Breakdown":
         create_total_hours_viewed_chart()
+        st.markdown("""
+        Netflix has always been known for its vast content library. The above graph shows how Netflix's total viewing hours are
+        spread out over all of its shows by level of popularity. It is clear from the graph how Netflix is not reliant on a small 
+        number of shows with the top 10 only taking up 5.3% of Netflixs total viewing hours as well as 19.6% for the top 100 and 
+        42.9% for the top 500.
+
+        It is clear from the above that variety is a big strength for Netflix and people do not use the service for only a small number
+        of shows
+         """)
     
     elif selected_tab == "Users Breakdown":
         # Load user data and create histogram
