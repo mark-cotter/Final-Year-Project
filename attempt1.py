@@ -9,97 +9,6 @@ import numpy as np
 from scipy.stats import spearmanr
 
 
-def create_subscription_growth_chart(df_sub):
-    fig_sub = go.Figure()
-
-    fig_sub.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Netflix Sub Change Q2Q'],
-                                 mode='lines+markers', name='Netflix',
-                                 line=dict(color='red')))
-    fig_sub.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Disney + Sub Change Q2Q'],
-                                 mode='lines+markers', name='Disney+',
-                                 line=dict(color='blue')))
-    fig_sub.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Hulu Sub Change Q2Q'],
-                                 mode='lines+markers', name='Hulu',
-                                 line=dict(color='green')))
-    fig_sub.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Peacock Subs Change Q2Q'],
-                                 mode='lines+markers', name='Peacock',
-                                 line=dict(color='black')))
-
-    fig_sub.update_layout(title_text='Subscription Growth Over Time',
-                          xaxis_title='Quarter',
-                          yaxis_title='Sub Increase in millions',
-                          legend=dict(title='Services'))
-
-    return fig_sub
-
-def create_netflix_subscription_breakdown_chart(df_netflix_data):
-    fig_netflix = go.Figure()
-
-    fig_netflix.add_trace(go.Scatter(x=df_netflix_data['Quarter'], y=df_netflix_data['Sub Increase Q2Q M'],
-                                     mode='lines+markers', name='Netflix', line=dict(color='red')))
-
-    fig_netflix.add_shape(
-        go.layout.Shape(
-            type="rect",
-            x0='19Q4',
-            y0=0,
-            x1='20Q2',
-            y1=16,
-            fillcolor="rgba(0, 0, 255, 0.15)",
-            line=dict(color="rgba(255, 0, 0, 0.5)"),
-        )
-    )
-
-    fig_netflix.add_annotation(
-        go.layout.Annotation(
-            x='19Q4',
-            y=15,
-            xref="x",
-            yref="y",
-            text="COVID-19 Pandemic",
-            showarrow=True,
-            arrowhead=2,
-            ax=-100,
-            ay=-40
-        )
-    )
-
-    price_hike_quarters = df_netflix_data[df_netflix_data['Price Hike for at least 1 plan'] == True]['Quarter']
-    fig_netflix.add_trace(go.Scatter(x=price_hike_quarters,
-                                     y=df_netflix_data.loc[df_netflix_data['Price Hike for at least 1 plan'] == True, 'Sub Increase Q2Q M'],
-                                     mode='markers', name='Price Hike for at least 1 plan',
-                                     marker=dict(symbol='x', size=13, color='black')))
-
-    fig_netflix.add_trace(go.Scatter(x=['23Q1'], y=[df_netflix_data.loc[df_netflix_data['Quarter'] == '23Q1', 'Sub Increase Q2Q M'].iloc[0]],
-                                     mode='markers', name='Password Sharing Crackdown',
-                                     marker=dict(symbol='circle', size=10, color='blue')))
-
-    fig_netflix.update_layout(title_text='Detailed Netflix Subscription Timeline',xaxis_title='Quarter', yaxis_title='Sub Increase in millions', height=370)
-
-    return fig_netflix
-
-def create_netflix_subscription_growth_chart(df_netflix_data, df_sub):
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], 
-                             y=df_netflix_data['Sub Increase Q2Q M'], 
-                             mode='lines+markers', 
-                             name='Netflix',
-                             line=dict(color='red')))
-
-    fig.add_trace(go.Scatter(x=df_sub['Quarter'], y=df_sub['Disney + Sub Change Q2Q'],
-                             mode='lines+markers', name='Disney+',
-                             line=dict(color='blue')))
-
-    fig.update_layout(
-        title_text='Netflix Sub Growth Over Time',
-        xaxis_title='Quarter',
-        yaxis_title='Sub Increase in millions',
-        height=370
-    )
-
-    return fig
-
 def plot_netflix_stock_growth(df_data):
     needed_quarters = ["18Q2", "18Q3", "18Q4", "19Q1", "19Q2", "19Q3", "19Q4", "20Q1", "20Q2"]
     df_data = df_data[df_data["Quarter"].isin(needed_quarters)]
@@ -761,26 +670,11 @@ def main():
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
-   
-        # Fetch data from GitHub for subscription change over quarters
-        df_sub = pd.read_csv("sub_change_Q2Q.csv")
-        if df_sub is not None:
-            st.plotly_chart(create_subscription_growth_chart(df_sub))
-            # Fetch data from GitHub for Netflix subscription breakdown
-            df_netflix_data = pd.read_csv("just_netflix_data.csv")
-            if df_netflix_data is not None:
-                st.plotly_chart(create_netflix_subscription_breakdown_chart(df_netflix_data))
-                st.write("## Analysis")
-                st.write("Analysis about how the most related variable to netflix seems to be Disney+.")
-                st.plotly_chart(create_netflix_subscription_growth_chart(df_netflix_data, df_sub))
-
-                # Plot Netflix stock growth
-                plot_netflix_stock_growth(df_netflix_data)
-                
-            else:
-                st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
+        df_netflix_data = pd.read_csv("just_netflix_data.csv")
+        if df_netflix_data is not None:
+            plot_netflix_stock_growth(df_netflix_data)
         else:
-            st.warning("Please provide the GitHub URL for subscription change over quarters data.")
+            st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
 
     elif selected_tab == "Placeholder":
         # Fetch data from GitHub for Netflix subscription breakdown
