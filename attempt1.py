@@ -665,8 +665,8 @@ def create_content_spend_chart(df_content):
 def create_total_hours_viewed_chart():
     total_hours_viewed = 93455200000 
     top_10_hours_viewed = 4951700000
-    top_100_hours_viewed = 18312100000
-    top_500_hours_viewed = 40080800000
+    top_100_hours_viewed = 13360400000
+    top_500_hours_viewed = 21768700000
     x_data = ['Total Hours Viewed']
     y_data = [total_hours_viewed]
 
