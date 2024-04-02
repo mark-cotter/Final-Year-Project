@@ -662,6 +662,58 @@ def create_content_spend_chart(df_content):
 
     st.plotly_chart(fig)
 
+def create_total_hours_viewed_chart():
+    total_hours_viewed = 93455200000 
+    top_10_hours_viewed = 4951700000
+    top_100_hours_viewed = 18312100000
+    top_500_hours_viewed = 40080800000
+    x_data = ['Total Hours Viewed']
+    y_data = [total_hours_viewed]
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=x_data,
+        y=y_data,
+        name='Total Hours Viewed',
+        marker_color='rgba(200,200,200,1)',
+        width=0.3
+    ))
+
+    fig.add_trace(go.Bar(
+        x=x_data,
+        y=[top_10_hours_viewed],
+        name='Top 10',
+        marker_color='rgba(0,0,200,1)',
+        base=0,
+        width=0.3
+    ))
+
+    fig.add_trace(go.Bar(
+        x=x_data,
+        y=[top_100_hours_viewed],
+        name='Top 100',
+        marker_color='rgba(200,0,0,1)',
+        base=top_10_hours_viewed, 
+        width=0.3  
+    ))
+
+    fig.add_trace(go.Bar(
+        x=x_data,
+        y=[top_500_hours_viewed],
+        name='Top 500',
+        marker_color='rgba(0,200,0,1)',
+        base=top_100_hours_viewed, 
+        width=0.3  
+    ))
+
+    fig.update_layout(
+        title='Total Hours Viewed on Netflix',
+        yaxis=dict(title='Hours'),
+        barmode='stack'
+    )
+
+    st.plotly_chart(fig)
     
 def main():
     st.sidebar.title("Navigation")
@@ -721,12 +773,8 @@ def main():
             st.plotly_chart(create_region_breakdown_chart(df_region))
 
     elif selected_tab == "Content Breakdown":
-        # Load Netflix movie details data
-        df_netflix_movies_data = pd.read_csv("Netflix_movie_details.csv")
-        # Create mean duration graph
         mean_duration_fig = create_mean_duration_graph(df_netflix_movies_data)
-        # Display the graph
-        st.plotly_chart(mean_duration_fig)
+        create_total_hours_viewed_chart()
     
     elif selected_tab == "Users Breakdown":
         # Load user data and create histogram
