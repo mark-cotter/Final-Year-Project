@@ -666,7 +666,7 @@ def create_content_spend_chart(df_content):
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
