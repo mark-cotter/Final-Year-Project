@@ -703,7 +703,7 @@ def create_total_hours_viewed_chart():
         y=[top_500_hours_viewed],
         name='Top 500',
         marker_color='rgba(0,200,0,1)',
-        base=top_100_hours_viewed, 
+        base=18312100000, 
         width=0.3  
     ))
 
