@@ -782,7 +782,7 @@ def main():
         42.9% for the top 500.
 
         It is clear from the above that variety is a big strength for Netflix and people do not use the service for only a small number
-        of shows
+        of shows.
          """)
     
     elif selected_tab == "Users Breakdown":
