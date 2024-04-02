@@ -773,7 +773,6 @@ def main():
             st.plotly_chart(create_region_breakdown_chart(df_region))
 
     elif selected_tab == "Content Breakdown":
-        mean_duration_fig = create_mean_duration_graph(df_netflix_movies_data)
         create_total_hours_viewed_chart()
     
     elif selected_tab == "Users Breakdown":
