@@ -729,7 +729,7 @@ def plot_netflix_content_by_year(df_watchtime):
         xaxis=dict(title='Release Year'),
         yaxis=dict(title='# Films On Netflix')
     )
-    fig.show()
+    st.plotly_chart(fig)
 
     
 def main():
