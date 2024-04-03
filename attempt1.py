@@ -715,6 +715,22 @@ def create_total_hours_viewed_chart():
     )
 
     st.plotly_chart(fig)
+
+
+def plot_netflix_content_by_year(df_watchtime):
+    df_watchtime = df_watchtime.dropna(subset=["Release Date"])
+    df_watchtime['Release Date'] = pd.to_datetime(df_watchtime['Release Date'])
+    df_watchtime['Year'] = df_watchtime['Release Date'].dt.year
+    year_counts = df_watchtime['Year'].value_counts().sort_index()
+    year_counts = year_counts.drop(pd.Timestamp.now().year, errors='ignore')
+    fig = go.Figure(data=[go.Bar(x=year_counts.index, y=year_counts.values)])
+    fig.update_layout(
+        title='Netflix Content By Year of Release',
+        xaxis=dict(title='Release Year'),
+        yaxis=dict(title='# Films On Netflix')
+    )
+    fig.show()
+
     
 def main():
     st.sidebar.title("Navigation")
@@ -788,6 +804,8 @@ def main():
         In fact Netflix is leaning into valuing quantity which is shown by the graph below where Netflix is releasing even more highly
         viewed shows year on year as shown by the graph below
          """)
+        df_watchtime=pd.read_csv('Watchtime_Netflix.csv')
+        plot_netflix_content_by_year(df_watchtime)
         
     
     elif selected_tab == "Users Breakdown":
