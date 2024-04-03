@@ -51,8 +51,7 @@ def plot_netflix_stock_growth(df_data):
     st.plotly_chart(fig)
 
 
-def create_genre_breakdown_charts(df_genre):
-    # Create the plot for total hours viewed by genre
+def plot_total_hours_viewed_by_genre(df_genre):
     genre_sum = df_genre.groupby("Genre")["Hours Viewed"].sum().reset_index()
     genre_sum_sorted = genre_sum.sort_values(by="Hours Viewed", ascending=False)
     fig_genre_total_hours = go.Figure(
@@ -68,8 +67,9 @@ def create_genre_breakdown_charts(df_genre):
         yaxis_title="Total Hours Viewed",
         yaxis=dict(range=[0, genre_sum_sorted["Hours Viewed"].max() + 1000000])
     )
+    st.plotly_chart(fig_genre_total_hours)
 
-    # Subset the DataFrame for Genre equals Children
+def plot_genre_comparison(df_genre):
     df_children = df_genre[df_genre['Genre'] == 'Children']
     cocomelon_hours = df_children[df_children['Title'].str.contains('CoComelon', case=False)]['Hours Viewed'].sum()
     paw_patrol_hours = df_children[df_children['Title'].str.contains('PAW Patrol', case=False)]['Hours Viewed'].sum()
@@ -86,8 +86,8 @@ def create_genre_breakdown_charts(df_genre):
         xaxis_title='Category',
         yaxis_title='Combined Viewing Hours'
     )
+    st.plotly_chart(fig_genre_comparison)
 
-    return fig_genre_total_hours, fig_genre_comparison
 
 def create_region_breakdown_chart(df_region):
     fig = go.Figure()
@@ -736,7 +736,7 @@ def plot_netflix_content_by_year(df_watchtime):
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Genre Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Netflix Subscription Breakdown":
@@ -774,15 +774,6 @@ def main():
     elif selected_tab == "Competition Breakdown":
             analyze_competition()
 
-    elif selected_tab == "Genre Breakdown":
-        # Load genre breakdown data
-        df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
-        # Remove commas from "Hours Viewed" and convert to integer
-        df_genre["Hours Viewed"] = df_genre["Hours Viewed"].str.replace(",", "").astype(int)
-
-        fig_genre_total_hours, fig_genre_comparison = create_genre_breakdown_charts(df_genre)
-        st.plotly_chart(fig_genre_total_hours)
-        st.plotly_chart(fig_genre_comparison)
 
     elif selected_tab == "Region Breakdown":
         # Fetch data from GitHub
@@ -807,8 +798,16 @@ def main():
          """)
         df_watchtime=pd.read_csv('Watchtime_Netflix.csv')
         plot_netflix_content_by_year(df_watchtime)
+        st.write()
+        st.markdown("""
+        The graph below from data of Netflix's 150 most watched shows of 2023 shows what genres are currently most popular
+        """)
+        df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
+        # Remove commas from "Hours Viewed" and convert to integer
+        df_genre["Hours Viewed"] = df_genre["Hours Viewed"].str.replace(",", "").astype(int)
+        plot_total_hours_viewed_by_genre(df_genre)
+        plot_genre_comparison(df_genre)
         
-    
     elif selected_tab == "Users Breakdown":
         # Load user data and create histogram
         df_users = pd.read_csv("Netflix Userbase.csv")
