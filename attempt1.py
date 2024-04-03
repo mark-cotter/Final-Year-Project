@@ -810,7 +810,13 @@ def main():
         It is clear that the thriller and especially drama genres are still most popular on Netflix. This could be because Netflix's
         style of shows that have twists and turns that the user wants to watch in one sitting which is especially true for dramas
         and thrillers in still very effective in keeping people on the Netflix platform.
+
+        Another slightly funnier observation that can be made by looking at this data is the domination of CocoMelon and Paw Patrol
+        in the Childrens Tv category. This is not shocking as if anyone who has spent time around young relatives can attest to the
+        fact that watchtime for these shows would be high and this assumption is verified in the data with just CocoMelon and Paw 
+        Patrol having higher viewing hours then all other Childrens TV shows in the top 150 as shown in the below graph.
         """)
+        
         plot_genre_comparison(df_genre)
         
     elif selected_tab == "Users Breakdown":
