@@ -800,12 +800,17 @@ def main():
         plot_netflix_content_by_year(df_watchtime)
         st.write()
         st.markdown("""
-        The graph below from data of Netflix's 150 most watched shows of 2023 shows what genres are currently most popular
+        The graph below from data of Netflix's 150 most watched shows of 2023 shows what genres are currently most popular.
         """)
         df_genre = pd.read_csv("Netflix_Genre_Breakdown.csv")
         # Remove commas from "Hours Viewed" and convert to integer
         df_genre["Hours Viewed"] = df_genre["Hours Viewed"].str.replace(",", "").astype(int)
         plot_total_hours_viewed_by_genre(df_genre)
+        st.markdown("""
+        It is clear that the thriller and especially drama genres are still most popular on Netflix. This could be because Netflix's
+        style of shows that have twists and turns that the user wants to watch in one sitting which is especially true for dramas
+        and thrillers in still very effective in keeping people on the Netflix platform.
+        """)
         plot_genre_comparison(df_genre)
         
     elif selected_tab == "Users Breakdown":
