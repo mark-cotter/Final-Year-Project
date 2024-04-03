@@ -722,7 +722,8 @@ def plot_netflix_content_by_year(df_watchtime):
     df_watchtime['Release Date'] = pd.to_datetime(df_watchtime['Release Date'])
     df_watchtime['Year'] = df_watchtime['Release Date'].dt.year
     year_counts = df_watchtime['Year'].value_counts().sort_index()
-    year_counts = year_counts.drop(pd.Timestamp.now().year, errors='ignore')
+    #Data is from June 2023 so not accurate for full year
+    year_counts = year_counts.drop(2023, errors='ignore')
     fig = go.Figure(data=[go.Bar(x=year_counts.index, y=year_counts.values)])
     fig.update_layout(
         title='Netflix Content By Year of Release',
