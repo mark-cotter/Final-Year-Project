@@ -784,7 +784,11 @@ def main():
         It is clear from the above that variety is a big strength for Netflix and people do not use the service for only a small number
         of shows. This bodes well for Netflix's longevity as it is not vulnerable to a big show leaving the service and taking all
         of its subscribers with it.
+
+        In fact Netflix is leaning into valuing quantity which is shown by the graph below where Netflix is releasing even more highly
+        viewed shows year on year as shown by the graph below
          """)
+        
     
     elif selected_tab == "Users Breakdown":
         # Load user data and create histogram
