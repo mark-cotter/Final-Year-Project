@@ -739,14 +739,14 @@ def main():
     tabs = ["Netflix Subscription Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
-    if selected_tab == "Netflix Subscription Breakdown":
+    if selected_tab == "Placeholder":
         df_netflix_data = pd.read_csv("just_netflix_data.csv")
         if df_netflix_data is not None:
             plot_netflix_stock_growth(df_netflix_data)
         else:
             st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
 
-    elif selected_tab == "Placeholder":
+    elif selected_tab == "Netflix Subscription Breakdown":
         # Fetch data from GitHub for Netflix subscription breakdown
         df_netflix_data = pd.read_csv("just_netflix_data.csv")
         if df_netflix_data is not None:
