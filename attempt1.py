@@ -736,7 +736,7 @@ def plot_netflix_content_by_year(df_watchtime):
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Competition Breakdown", "Demographic Breakdown", "Content Breakdown", "Region Breakdown", "Users Breakdown", "Placeholder"]
+    tabs = ["Netflix Subscription Breakdown", "Competition Breakdown", "Demographic Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Placeholder":
@@ -774,12 +774,6 @@ def main():
     elif selected_tab == "Competition Breakdown":
             analyze_competition()
 
-
-    elif selected_tab == "Region Breakdown":
-        # Fetch data from GitHub
-        df_region = pd.read_csv("netflix_region_breakdown.csv")
-        if df_region is not None:
-            st.plotly_chart(create_region_breakdown_chart(df_region))
 
     elif selected_tab == "Content Breakdown":
         create_total_hours_viewed_chart()
