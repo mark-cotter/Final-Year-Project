@@ -736,7 +736,7 @@ def plot_netflix_content_by_year(df_watchtime):
 def main():
     st.sidebar.title("Navigation")
     # Create tabs in the sidebar
-    tabs = ["Netflix Subscription Breakdown", "Region Breakdown", "Content Breakdown", "Users Breakdown", "Placeholder", "Competition Breakdown","Demographic Breakdown"]
+    tabs = ["Netflix Subscription Breakdown", "Competition Breakdown", "Demographic Breakdown", "Content Breakdown", "Region Breakdown", "Users Breakdown", "Placeholder"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
     if selected_tab == "Placeholder":
