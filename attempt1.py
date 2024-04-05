@@ -776,6 +776,8 @@ def main():
 
 
     elif selected_tab == "Content Breakdown":
+
+        st.write("### Content Quantity Analysis")
         create_total_hours_viewed_chart()
         st.markdown("""
         Netflix has always been known for its vast content library. The above graph shows how Netflix's total viewing hours are
@@ -793,6 +795,7 @@ def main():
         df_watchtime=pd.read_csv('Watchtime_Netflix.csv')
         plot_netflix_content_by_year(df_watchtime)
         st.write()
+        st.write("### Genre Analysis")
         st.markdown("""
         The graph below from data of Netflix's 150 most watched shows of 2023 shows what genres are currently most popular.
         """)
