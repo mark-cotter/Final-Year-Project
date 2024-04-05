@@ -750,6 +750,7 @@ def main():
         # Fetch data from GitHub for Netflix subscription breakdown
         df_netflix_data = pd.read_csv("just_netflix_data.csv")
         if df_netflix_data is not None:
+            st.write("### Netflix Subscription Overview")
             plot_netflix_subscription_growth(df_netflix_data)
             st.markdown("""
             The above graph shows Netflix's subscription growth over time. Several analysis were performed about observations that
