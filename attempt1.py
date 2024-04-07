@@ -735,7 +735,6 @@ def plot_netflix_content_by_year(df_watchtime):
     
 def main():
     st.sidebar.title("Netflix Analysis App")
-    # Create tabs in the sidebar
     tabs = ["Netflix Subscription Breakdown", "Competition Breakdown", "Demographic Breakdown", "Content Breakdown"]
     selected_tab = st.sidebar.radio("Select Analysis", tabs)
 
@@ -747,7 +746,6 @@ def main():
             st.warning("Please provide the GitHub URL for Netflix subscription breakdown data.")
 
     elif selected_tab == "Netflix Subscription Breakdown":
-        # Fetch data from GitHub for Netflix subscription breakdown
         df_netflix_data = pd.read_csv("just_netflix_data.csv")
         if df_netflix_data is not None:
             st.write("### Netflix Subscription Overview")
@@ -757,11 +755,9 @@ def main():
             could be gleaned from this graph. In the selection bar below select that topics that you would like to learn more about
             """)
 
-            # Allow user to select which analyses to perform
             selected_analyses = st.multiselect("Select analyses to perform:", ["Q4 Analysis", "COVID-19 Analysis", "Price Hikes Analysis", "Password Sharing Crackdown Analysis"])
             st.write("")
             st.write("")
-            # Call selected analyses based on user's selection
             if "Q4 Analysis" in selected_analyses:
                 Q4_analysis(df_netflix_data)
             if "COVID-19 Analysis" in selected_analyses:
