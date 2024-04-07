@@ -293,7 +293,7 @@ def plot_netflix_sub_growth_v_price_hikes(df_netflix_data):
         y=df_netflix_data.loc[df_netflix_data['Price Hike for at least 1 plan'] == True, 'Sub Increase Q2Q M'],
         mode='markers',
         name='Price Hike for at least 1 plan',
-        marker=dict(symbol='x', size=13, color='black')
+        marker=dict(symbol='x', size=13, color='orange')
     ))
 
     # Update layout
