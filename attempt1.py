@@ -550,10 +550,6 @@ def plot_total_subscriber_growth(df_data):
     st.plotly_chart(fig)
 
 
-import streamlit as st
-import pandas as pd
-from scipy.stats import spearmanr
-
 def analyze_competition():
     st.write("### Competition Analysis")
     st.markdown("""
@@ -684,7 +680,7 @@ def create_total_hours_viewed_chart():
     fig.add_trace(go.Bar(
         x=x_data,
         y=[top_10_hours_viewed],
-        name='Top 10',
+        name='Top 10 Shows',
         marker_color='rgba(0,0,200,1)',
         base=0,
         width=0.3
@@ -693,7 +689,7 @@ def create_total_hours_viewed_chart():
     fig.add_trace(go.Bar(
         x=x_data,
         y=[top_10_to_100_hours_viewed],
-        name='Top 100',
+        name='Top 100 Shows',
         marker_color='rgba(200,0,0,1)',
         base=top_10_hours_viewed, 
         width=0.3  
@@ -702,7 +698,7 @@ def create_total_hours_viewed_chart():
     fig.add_trace(go.Bar(
         x=x_data,
         y=[top_10_to_500_hours_viewed],
-        name='Top 500',
+        name='Top 500 Shows',
         marker_color='rgba(0,200,0,1)',
         base=top_100_hours_viewed, 
         width=0.3  
