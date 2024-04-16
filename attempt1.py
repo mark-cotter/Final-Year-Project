@@ -225,7 +225,7 @@ def plot_Q4_sub_growth(df_netflix_data):
     fig.add_trace(go.Scatter(x=df_netflix_data['Quarter'], y=df_netflix_data['Sub Increase Q2Q M'],
                              mode='lines+markers', name='Netflix', line=dict(color='red')))
     fig.add_trace(go.Scatter(x=df_netflix_data[q4_mask]['Quarter'], y=df_netflix_data[q4_mask]['Sub Increase Q2Q M'],
-                             mode='markers', name='Q4', marker=dict(color='lightblue', size=10, symbol='cross')))
+                             mode='markers', name='Q4', marker=dict(color='blue', size=10, symbol='cross')))
     
     # Update layout
     fig.update_layout(title='Netflix Q4 Subscription Increase', xaxis_title='Quarter', yaxis_title='Subscription Increase')
