@@ -558,6 +558,7 @@ def analyze_competition():
     """)
     df_data = pd.read_csv("Sub_Change_Summary.csv")
     columns_of_interest = ["Disney Sub Change Q2Q", "Netflix Sub Change Q2Q", "Hulu Sub Change Q2Q", "Peacock Sub Change Q2Q"]
+    columns_of_interest = ["Disney+ Subscribers", "Netflix Subscribers", "Hulu Subscribers", "Peacock Subscribers"]
     subset = df_data[columns_of_interest]
     data_heatmap(subset)
     st.markdown("""
