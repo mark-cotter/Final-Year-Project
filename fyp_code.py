@@ -672,24 +672,7 @@ def main():
         """)
         
         plot_genre_comparison(df_genre)
-        
-    elif selected_tab == "Users Breakdown":
-        # Load user data and create histogram
-        df_users = pd.read_csv("Netflix Userbase.csv")
-        fig_users_histogram = create_users_breakdown_histogram(df_users)
-        st.plotly_chart(fig_users_histogram)
 
-        # Add pie chart for gender distribution
-        fig_gender_distribution = create_gender_distribution_pie_chart(df_users)
-        st.plotly_chart(fig_gender_distribution)
-        
-        # Add pie chart for subscription type distribution
-        fig_subscription_distribution = create_subscription_pie_chart(df_users)
-        st.plotly_chart(fig_subscription_distribution)
-        
-        # Add bar chart for subscription revenue
-        fig_subscription_revenue = create_subscription_revenue_bar_chart(df_users)
-        st.plotly_chart(fig_subscription_revenue)
 
 
     elif selected_tab == "Demographic Breakdown":
